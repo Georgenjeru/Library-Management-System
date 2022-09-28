@@ -9,9 +9,29 @@
     <servlet-class>com.library.test.servletSample</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>com.library.test.Login</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>Signup</servlet-name>
+    <servlet-class>com.library.test.Signup</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>SampleServlet</servlet-name>
     <url-pattern>/welcome</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>Signup</servlet-name>
+    <url-pattern>/signup</url-pattern>
   </servlet-mapping>
 
 </web-app>
