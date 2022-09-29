@@ -11,11 +11,11 @@
 
   <servlet>
     <servlet-name>Login</servlet-name>
-    <servlet-class>com.library.test.Login</servlet-class>
+    <servlet-class>com.library.test.LoginServlet</servlet-class>
   </servlet>
 
   <servlet>
-    <servlet-name>Signup</servlet-name>
+    <servlet-name>Register</servlet-name>
     <servlet-class>com.library.test.RegisterServlet</servlet-class>
   </servlet>
 

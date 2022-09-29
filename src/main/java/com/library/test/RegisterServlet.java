@@ -24,7 +24,7 @@ public class RegisterServlet implements Servlet{
         wr.print("<body>");
         wr.print("<div class=\"bg-img\">");
         wr.print("<div class=\"content\">");
-        wr.print("<header>Signup Form </header>");
+        wr.print("<header>Please Fill in your the Details </header>");
         wr.print("<form action=\"#\">");
         wr.print("<div class=\"field space\">");
         wr.print("<div class=\"field\">");
