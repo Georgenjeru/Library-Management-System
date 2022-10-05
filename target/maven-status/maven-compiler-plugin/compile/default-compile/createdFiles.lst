@@ -2,7 +2,7 @@ com\library\test\Login.class
 com\library\test\HttpResponseSample.class
 com\library\test\ServletSample.class
 com\library\test\Index.class
-com\library\test\Request.class
 com\library\test\Register.class
 com\library\test\contactUs.class
+com\library\test\InitialHome.class
 com\library\test\Home.class

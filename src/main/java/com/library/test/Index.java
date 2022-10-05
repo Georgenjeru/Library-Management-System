@@ -17,6 +17,11 @@ public class Index extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         res.getWriter().print("<!DOCTYPE html>"
                 + "<html> "
+                + "<style>"
+                +" h4 {text-align: center;}"
+                + "h6 {text-align: center;}"
+                +"</style>"
+                + "<body bgcolor=\"Lightskyblue\" style=\"margin: auto; width: 220px;\">"
                 + "<script type=\"text/javascript\" src=\"./js/sample.js\"></script>"
                 + "<body>"
                 + "<head> "
