@@ -1,8 +1,11 @@
 package com.actions;
 
 import com.model.Admin;
+import com.mysql.jdbc.Connection;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
+import java.sql.*;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +27,7 @@ import static com.library.test.LoginAction.adminList;
 public class AdminAction extends HttpServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        res.getWriter().print(this.addUser(null));
+        res.getWriter().print(this.addUserView(null));
     }
 
     @SuppressWarnings("unchecked")
@@ -35,39 +40,40 @@ public class AdminAction extends HttpServlet {
         try {
             BeanUtils.populate(admin, req.getParameterMap());
 
-        } catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
 
         if (StringUtils.isBlank(admin.getName())) {
-            wr.print(this.addUser("Name is required<br/>"));
+            wr.print(this.addUserView("Name is required<br/>"));
             return;
         }
 
         if (StringUtils.isBlank(admin.getEmail())) {
-            wr.print(this.addUser("Email is required<br/>"));
+            wr.print(this.addUserView("Email is required<br/>"));
             return;
         }
         if (StringUtils.isBlank(admin.getId())) {
-            wr.print(this.addUser("Id is required<br/>"));
+            wr.print(this.addUserView("Id is required<br/>"));
             return;
         }
+        this.insert(admin);
 
-        HttpSession session = req.getSession();
+        /*HttpSession session = req.getSession();
         adminList = (List<Admin>) session.getAttribute("users");
 
         if (adminList == null)
             adminList = new ArrayList<Admin>();
 
         adminList.add(admin);
-        session.setAttribute("users", adminList);
+        session.setAttribute("users", adminList);*/
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
         dispatcher.forward(req, res);
 
     }
 
-    public String addUser(String actionError){
+    public String addUserView(String actionError) {
         return "<!DOCTYPE html>"
                 + "<html> "
                 + "<head> "
@@ -101,9 +107,6 @@ public class AdminAction extends HttpServlet {
                 + "i span{margin-left: 8px;font-weight: 500;letter-spacing: 1px;font-size: 16px;font-family: 'Poppins',sans-serif;}"
                 + "</style>"
 
-
-
-
                 + "<body>"
                 + "<h1>" + getServletContext().getAttribute("applicationLabel") + "</h1>"
                 + "<h2> Add User</h2>"
@@ -115,9 +118,35 @@ public class AdminAction extends HttpServlet {
                 + "<tr> <td> <input type=\"submit\" value=\"Submit\"></tr> "
                 + "</table>"
                 + "</form>"
-                + "<span style=\"color:red\">" + (actionError != null? actionError : "") + "</span><br/>"
+                + "<span style=\"color:red\">" + (actionError != null ? actionError : "") + "</span><br/>"
                 + "Home? <a href='./home'>Register</a><br/>"
                 + "</body>"
                 + "</html>";
+    }
+
+    public void insert(Admin admin) {
+        if (admin == null || StringUtils.isBlank(admin.getName()) || StringUtils.isBlank(admin.getId()))
+            return;
+
+
+        Connection connection = null;
+
+        try {
+            connection = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/admin", "root", "George@23");
+
+            Statement sqlStmt = connection.createStatement();
+            sqlStmt.executeUpdate("insert into users(Id, Name, Email) " +
+                    "values('" + admin.getId() + "','" + admin.getName() +  "','" + admin.getEmail() + "')");
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        } finally {
+            try {
+                connection.close();
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 }

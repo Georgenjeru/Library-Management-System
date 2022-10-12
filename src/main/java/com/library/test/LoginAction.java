@@ -1,8 +1,11 @@
 package com.library.test;
 
 import com.model.Admin;
+import com.model.User;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +17,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +28,15 @@ import java.util.List;
         @WebInitParam(name = "password", value = "123456")
 })
 public class LoginAction extends HttpServlet {
+
+    ServletContext servletCtx = null;
+
+    public void init(ServletConfig config) throws ServletException{
+        super.init(config);
+
+        servletCtx = config.getServletContext();
+
+    }
     public static List<Admin> adminList;
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         res.getWriter().print(this.login(null));
@@ -48,7 +62,7 @@ public class LoginAction extends HttpServlet {
             wr.print(this.login("Invalid username & password combination<br/>"));
             return;
         }
-        try{
+        /*try{
             Connection con = DatabaseConnection.initializeDatabase();
             System.out.println("connection successful");
             PreparedStatement st = con.prepareStatement("insert into users values(?, ?)");
@@ -59,7 +73,7 @@ public class LoginAction extends HttpServlet {
             con.close();
         }
         catch (Exception e) {
-            e.printStackTrace();}
+            e.printStackTrace();}*/
 
 
 
@@ -138,5 +152,28 @@ public class LoginAction extends HttpServlet {
                 + "Register? <a href='./register'>Register</a><br/>"
                 + "</body>"
                 + "</html>";
+    }
+    public User login(String username, String password) {
+
+        User user = null;
+
+        try {
+            Connection connection = (Connection) servletCtx.getAttribute("dbConnection");
+            Statement sqlStmt = connection.createStatement();
+
+            ResultSet result = sqlStmt.executeQuery("select * from users where username='" + username + "' and " +
+                    "password='" + password + "'");
+            while (result.next()) {
+                user = new User();
+                user.setId((long) result.getInt("id"));
+                user.setUsername(result.getString("username"));
+            }
+
+        }catch (Exception ex) {
+            System.out.println("Log In Error: " + ex.getMessage());
+        }
+
+        return user;
+
     }
 }

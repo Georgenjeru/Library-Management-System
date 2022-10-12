@@ -1,7 +1,10 @@
 package com.library.test;
 
 import com.model.Admin;
+import com.mysql.jdbc.Connection;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,16 +12,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/home")
 public class HomeAction extends HttpServlet {
+    ServletContext servletCtx = null;
+
+    public void init(ServletConfig config) throws ServletException{
+        super.init(config);
+
+        servletCtx = config.getServletContext();
+
+    }
 
 
     @SuppressWarnings("unchecked")
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        HttpSession session = req.getSession();
 
         res.getWriter().print("<!DOCTYPE html>"
                 + "<html> "
@@ -28,7 +41,7 @@ public class HomeAction extends HttpServlet {
                 + "<body>"
                 + "<h1>" + getServletContext().getAttribute("applicationLabel") + "</h1>"
                 + "<span style=\"color:green;font-size: 24px;font-weight:bold\">Logged In</span>"
-                + "<br/>" + adminGrid((List<Admin>) session.getAttribute("users"))
+                + "<br/>" + adminGrid(new Admin())
                 + "<br/>Logout <a href='./logout'>Logout</a><br/>"
                 + "</body>"
                 + "</html>");
@@ -37,8 +50,8 @@ public class HomeAction extends HttpServlet {
     @SuppressWarnings("unchecked")
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        if (session == null || session.getId() == null)
-            res.sendRedirect("./");
+        //if (session == null || session.getId() == null)
+            //res.sendRedirect("./");
 
         res.getWriter().print("<!DOCTYPE html>"
                 + "<html> "
@@ -50,16 +63,34 @@ public class HomeAction extends HttpServlet {
                 + "<h2> Welcome: " + session.getAttribute("username") + "  Logged In At: " + session.getAttribute("loggedInTime") + "</h2>"
                 + "<span style=\"color:green;font-size: 24px;font-weight:bold\">Logged In</span>"
                 + "<br/>Logout <a href='./student'>Add User</a><br/>"
-                + "<br/>" + adminGrid((List<Admin>) session.getAttribute("users"))
+                + "<br/>" + adminGrid(new Admin())
                 + "<br/>Logout <a href='./logout'>Logout</a><br/>"
                 + "</body>"
                 + "</html>");
     }
 
-    public String adminGrid(List<Admin> users) {
+    public String adminGrid(Admin adminfilter) {
 
-        if (users == null)
-            users = new ArrayList<Admin>();
+        List<Admin>admins = new ArrayList<Admin>();
+        Connection connection = null;
+
+        try {
+            connection = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/admin", "root", "George@23");
+            Statement sqlStmt = connection.createStatement();
+
+            ResultSet result = sqlStmt.executeQuery("select * from users");
+            while (result.next()) {
+                Admin admin = new Admin();
+                admin.setId(result.getString("Id"));
+                admin.setName(result.getString("name"));
+                admin.setEmail(result.getString("Email"));
+                admins.add(admin);
+            }
+
+        }catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
 
         String adminGrid = "<table>"
                 + "<tr>"
@@ -70,7 +101,7 @@ public class HomeAction extends HttpServlet {
                 + "<th>Delete</th>"
                 + "</tr>";
 
-        for (Admin admin : users)
+        for (Admin admin : admins)
             adminGrid += "<tr>"
                     + "<td>" + admin.getEmail() + "</td>"
                     + "<td>" + admin.getId() + "</td>"
