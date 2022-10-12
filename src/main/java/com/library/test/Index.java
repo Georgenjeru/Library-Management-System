@@ -1,18 +1,15 @@
 package com.library.test;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet(value = "")
 public class Index extends HttpServlet {
 
-    ServletConfig config = null;
-
-    public void init(ServletConfig config) throws ServletException{
-        this.config = config;
-    }
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         res.getWriter().print("<!DOCTYPE html>"
@@ -25,7 +22,8 @@ public class Index extends HttpServlet {
                 + "<script type=\"text/javascript\" src=\"./js/sample.js\"></script>"
                 + "<body>"
                 + "<head> "
-                + "<h1>" + config.getServletContext().getInitParameter("applicationLabel") + "</h1>"
+                +  "<h1>" + getServletContext().getAttribute("applicationLabel") + "</h1>"
+                //+ "<h1>" + config.getServletContext().getInitParameter("applicationLabel") + "</h1>"
                 + "</head>"
                 + " Do Register <a href='./register'>Register</a><br/>"
                 + " Do Login <a href='./login'>Login</a><br/>"

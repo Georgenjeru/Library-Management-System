@@ -1,20 +1,17 @@
 package com.library.test;
 
-import javax.servlet.ServletConfig;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+
+@WebServlet("/register")
 public class Register extends HttpServlet {
-
-    ServletConfig config = null;
-
-    public void init(ServletConfig config) throws ServletException {
-        this.config = config;
-    }
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         res.getWriter().print(this.register(null));
@@ -22,7 +19,7 @@ public class Register extends HttpServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         PrintWriter wr = res.getWriter();
-        String action = req.getParameter("action");
+        //String action = req.getParameter("action");
         String firstName = req.getParameter("firstName");
         String secondName = req.getParameter("secondName");
         String userName = req.getParameter("userName");
@@ -72,6 +69,7 @@ public class Register extends HttpServlet {
                     + "</style>"
                     //+"</title>"
                     + "</head>"
+                    + "<h1>" + getServletContext().getAttribute("applicationLabel") + "</h1>"
                     + "<body bgcolor=\"violet\" style=\"margin: auto; width: 220px;\">"
                     + "<form action=\"./register\" method=\"post\">"
                     + "<h3 > NEW USER REGISTRATION</h3>"

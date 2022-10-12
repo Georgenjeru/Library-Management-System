@@ -1,8 +1,12 @@
-package com.library.test;
+package com.actions;
+
+import com.model.Admin;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,65 +14,64 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class Login extends HttpServlet {
+import static com.library.test.LoginAction.adminList;
 
-    ServletConfig config = null;
-
-    public void init(ServletConfig config) throws ServletException {
-        this.config = config;
-    }
+@WebServlet("/student")
+public class AdminAction extends HttpServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        res.getWriter().print(this.login(null));
+        res.getWriter().print(this.addUser(null));
     }
 
+    @SuppressWarnings("unchecked")
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         PrintWriter wr = res.getWriter();
 
-        String password = req.getParameter("password");
-        String username = req.getParameter("username");
+        Admin admin = new Admin();
 
-        if (username == null || username.equalsIgnoreCase("")) {
-            wr.print(this.login("Username is required<br/>"));
+        try {
+            BeanUtils.populate(admin, req.getParameterMap());
+
+        } catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+
+        if (StringUtils.isBlank(admin.getName())) {
+            wr.print(this.addUser("Name is required<br/>"));
             return;
         }
 
-        if (password == null || password.equalsIgnoreCase("")) {
-            wr.print(this.login("Password is required<br/>"));
+        if (StringUtils.isBlank(admin.getEmail())) {
+            wr.print(this.addUser("Email is required<br/>"));
+            return;
+        }
+        if (StringUtils.isBlank(admin.getId())) {
+            wr.print(this.addUser("Id is required<br/>"));
             return;
         }
 
-        if (!username.equals(config.getInitParameter("username")) && !password.equals(config.getInitParameter("password"))) {
-            wr.print(this.login("Invalid username & password combination<br/>"));
-            return;
-        }
+        HttpSession session = req.getSession();
+        adminList = (List<Admin>) session.getAttribute("users");
 
-        HttpSession session = req.getSession(true);
-        session.setAttribute("loggedInTime", "Logged In Time:" + new Date());
+        if (adminList == null)
+            adminList = new ArrayList<Admin>();
 
-        List<String> studentNames  = new ArrayList<String>();
-        studentNames.add("Bonnie");
-        studentNames.add("Simon");
-        studentNames.add("James");
-        studentNames.add("Mercy");
-        studentNames.add("George");
-
-        session.setAttribute("students", studentNames);
+        adminList.add(admin);
+        session.setAttribute("users", adminList);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
         dispatcher.forward(req, res);
 
     }
 
-    public String login(String actionError){
+    public String addUser(String actionError){
         return "<!DOCTYPE html>"
-                + "<html>"
-                + "<head>"
-                + "<title>Login Page</title>"
+                + "<html> "
+                + "<head> "
+                + "<title>Add User</title>"
                 + "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"/>"
                 + "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\"/>"
                 + "</head>"
@@ -98,33 +101,22 @@ public class Login extends HttpServlet {
                 + "i span{margin-left: 8px;font-weight: 500;letter-spacing: 1px;font-size: 16px;font-family: 'Poppins',sans-serif;}"
                 + "</style>"
 
+
+
+
                 + "<body>"
-                + "<h1>" + config.getServletContext().getInitParameter("applicationLabel") + "</h1>"
-                + "<form action=\"./login\" method=\"post\">"
-                + "<div class=\"bg-img\">"
-                + "<div class=\"content\">"
-                + "<header>Library Management System</header>"
-                + "<header>Admin/User Login </header>"
-                + "<form action=\"#\">"
-                + "<div class=\"field\">"
-                + "<span class=\"fa fa-user\"></span>"
-                + "<input type=\"text\" name=\"username\" placeholder=\"Username/Email\">"
-                + "</div>"
-                + "<div class=\"field space\">"
-                + "<span class=\"fa fa-lock\"></span>"
-                + "<input type=\"Password\" name=\"password\" placeholder=\"Password\">"
-                + "</div>"
-                + "<div class=\"pass\">"
-                + "<a href=\"#\">Forgot Password?</a>"
-                + "</div>"
-                + "<div class=\"field\">"
-                + "<input type=\"submit\" value=\"LOGIN\">"
-                + "</div>"
+                + "<h1>" + getServletContext().getAttribute("applicationLabel") + "</h1>"
+                + "<h2> Add User</h2>"
+                + "<form action=\"./student\" method=\"post\">"
+                + "<table> "
+                + "<tr> <td> User Email: </td> <td> <input type=\"text\" name=\"email\"> </td> </tr> "
+                + "<tr> <td> User ID: </td> <td> <input type=\"text\" name=\"id\"> </td> </tr> "
+                + "<tr> <td> User Name: </td> <td> <input type=\"text\" name=\"name\"> </td> </tr> "
+                + "<tr> <td> <input type=\"submit\" value=\"Submit\"></tr> "
+                + "</table>"
                 + "</form>"
-                + "</div>"
-                + "</div>"
-                + "<span style=\"color:red\">" + (actionError != null ? actionError : "") + "</span>"
-                + "Register? <a href='./register'>Register</a><br/>"
+                + "<span style=\"color:red\">" + (actionError != null? actionError : "") + "</span><br/>"
+                + "Home? <a href='./home'>Register</a><br/>"
                 + "</body>"
                 + "</html>";
     }
