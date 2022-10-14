@@ -72,10 +72,9 @@ public class HomeAction extends HttpServlet {
     public String adminGrid(Admin adminfilter) {
 
         List<Admin>admins = new ArrayList<Admin>();
-        Connection connection = null;
 
         try {
-            connection = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/admin", "root", "George@23");
+            Connection connection = (Connection) servletCtx.getAttribute ("dbConnection");
             Statement sqlStmt = connection.createStatement();
 
             ResultSet result = sqlStmt.executeQuery("select * from users");

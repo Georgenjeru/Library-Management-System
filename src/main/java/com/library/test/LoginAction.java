@@ -2,6 +2,7 @@ package com.library.test;
 
 import com.model.Admin;
 import com.model.User;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -16,10 +17,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +45,7 @@ public class LoginAction extends HttpServlet {
 
         PrintWriter wr = res.getWriter();
 
+
         String password = req.getParameter("password");
         String username = req.getParameter("username");
 
@@ -58,31 +58,21 @@ public class LoginAction extends HttpServlet {
             wr.print(this.login("Password is required<br/>"));
             return;
         }
+
         if (!username.equals(getServletConfig().getInitParameter("username")) && !password.equals(getServletConfig().getInitParameter("password"))) {
             wr.print(this.login("Invalid username & password combination<br/>"));
             return;
         }
-        /*try{
-            Connection con = DatabaseConnection.initializeDatabase();
-            System.out.println("connection successful");
-            PreparedStatement st = con.prepareStatement("insert into users values(?, ?)");
-            st.setString(1, req.getParameter("username"));
-            st.setString(2, req.getParameter("password"));
-            st.executeUpdate();
-            st.close();
-            con.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();}*/
-
-
+        /*User user = this.login(username, DigestUtils.md5Hex(password));
+        if (user == null || user.getId() == null) {
+            wr.print(this.login("Invalid username & password combination<br/>"));
+            return;
+        }*/
 
         HttpSession session = req.getSession(true);
         session.setAttribute("username", username);
         session.setAttribute("loggedInTime", "Logged In Time:" + new Date());
 
-        List<Admin> adminList  = new ArrayList<Admin>();
-        session.setAttribute("users", adminList);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
         dispatcher.forward(req, res);
@@ -161,7 +151,7 @@ public class LoginAction extends HttpServlet {
             Connection connection = (Connection) servletCtx.getAttribute("dbConnection");
             Statement sqlStmt = connection.createStatement();
 
-            ResultSet result = sqlStmt.executeQuery("select * from users where username='" + username + "' and " +
+            ResultSet result = sqlStmt.executeQuery("select * from userlogin where username='" + username + "' and " +
                     "password='" + password + "'");
             while (result.next()) {
                 user = new User();

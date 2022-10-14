@@ -8,6 +8,8 @@ import java.sql.*;
 
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +27,14 @@ import static com.library.test.LoginAction.adminList;
 
 @WebServlet("/student")
 public class AdminAction extends HttpServlet {
+    ServletContext servletCtx = null;
+
+    public void init(ServletConfig config) throws ServletException{
+        super.init(config);
+
+        servletCtx = config.getServletContext();
+
+    }
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         res.getWriter().print(this.addUserView(null));
@@ -128,11 +138,8 @@ public class AdminAction extends HttpServlet {
         if (admin == null || StringUtils.isBlank(admin.getName()) || StringUtils.isBlank(admin.getId()))
             return;
 
-
-        Connection connection = null;
-
         try {
-            connection = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/admin", "root", "George@23");
+            Connection connection = (Connection) servletCtx.getAttribute ("dbConnection");
 
             Statement sqlStmt = connection.createStatement();
             sqlStmt.executeUpdate("insert into users(Id, Name, Email) " +
@@ -141,12 +148,10 @@ public class AdminAction extends HttpServlet {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
 
-        } finally {
-            try {
-                connection.close();
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
     }
 }
+}
+
+
+
+

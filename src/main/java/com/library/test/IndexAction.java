@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(value = "")
-public class Index extends HttpServlet {
+public class IndexAction extends HttpServlet {
 
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

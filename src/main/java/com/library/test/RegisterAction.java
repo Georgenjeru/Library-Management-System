@@ -1,6 +1,11 @@
 package com.library.test;
 
 
+import com.mysql.jdbc.Connection;
+import org.apache.commons.codec.digest.DigestUtils;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,10 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Statement;
 
 
 @WebServlet("/register")
-public class Register extends HttpServlet {
+public class RegisterAction extends HttpServlet {
+
+    ServletContext servletCtx = null;
+    public void init(ServletConfig config) throws ServletException{
+        super.init(config);
+
+        servletCtx = config.getServletContext();
+
+    }
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         res.getWriter().print(this.register(null));
@@ -19,7 +33,6 @@ public class Register extends HttpServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         PrintWriter wr = res.getWriter();
-        //String action = req.getParameter("action");
         String firstName = req.getParameter("firstName");
         String secondName = req.getParameter("secondName");
         String userName = req.getParameter("userName");
@@ -51,9 +64,10 @@ public class Register extends HttpServlet {
             if (password != null && confirmPassword != null && !password.equals(confirmPassword))
                 actionError += "Password & confirm password do not match<br/>";
 
-            if (actionError.equals(""))
+            if (actionError.equals("")) {
+                this.insert(email, DigestUtils.md5Hex(password));
                 res.sendRedirect("./login");
-            else
+            }else
                 wr.print(this.register(actionError));
         }
 
@@ -110,4 +124,17 @@ public class Register extends HttpServlet {
                     + "</body>"
                     + "</html>";
         }
+    public void insert(String username, String password) {
+        try {
+            Connection connection = (Connection) servletCtx.getAttribute("dbConnection");
+
+            Statement sqlStmt = connection.createStatement();
+            sqlStmt.executeUpdate("insert into userlogin(username,password) " +
+                    "values('" + username+ "','" + password + "')");
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
     }
+}
