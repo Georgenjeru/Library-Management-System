@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import javax.sql.DataSource;
 import java.sql.DriverManager;
 
 @WebListener
@@ -23,13 +24,13 @@ public class ContextListener implements ServletContextListener {
             dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/admin");
             dataSource.setUsername("root");
             dataSource.setPassword("George@23");
-            dataSource.setMaxIdle(9);
-            Connection connection = (Connection) dataSource.getConnection();*/
-            //ctx.setAttribute("dbConnection",connection);
+            Connection connection = (Connection) dataSource.getConnection();
+            ctx.setAttribute("dbConnection",connection);*/
+            System.out.println("Connection Found..");
 
             Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/admin", "root", "George@23");
             ctx.setAttribute("dbConnection", connection);
-            System.out.println("Connection Found..");
+
         }
         catch (Exception ex){
             System.out.println("Connection Not Found" +ex.getMessage());

@@ -50,9 +50,6 @@ public class HomeAction extends HttpServlet {
     @SuppressWarnings("unchecked")
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        //if (session == null || session.getId() == null)
-            //res.sendRedirect("./");
-
         res.getWriter().print("<!DOCTYPE html>"
                 + "<html> "
                 + "<head> "

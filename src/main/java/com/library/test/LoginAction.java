@@ -22,10 +22,7 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/login", initParams = {
-        @WebInitParam(name = "username", value = "njeru@gmail.com"),
-        @WebInitParam(name = "password", value = "123456")
-})
+@WebServlet(urlPatterns = "/login")
 public class LoginAction extends HttpServlet {
 
     ServletContext servletCtx = null;
@@ -37,9 +34,9 @@ public class LoginAction extends HttpServlet {
 
     }
     public static List<Admin> adminList;
-    public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    /*public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         res.getWriter().print(this.login(null));
-    }
+    }*/
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
@@ -50,6 +47,25 @@ public class LoginAction extends HttpServlet {
         String username = req.getParameter("username");
 
         if (username == null || username.equalsIgnoreCase("")) {
+            servletCtx.setAttribute("loginError" , "Username is required<br/>");
+            res.sendRedirect("./login.jsp");
+            return;
+        }
+
+        if (password == null || password.equalsIgnoreCase("")) {
+            servletCtx.setAttribute("loginError" , "Password is required<br/>");
+            res.sendRedirect("./login.jsp");
+            return;
+        }
+
+        /*User user = this.login(username, password);
+        if (user == null || user.getId() == null) {
+            servletCtx.setAttribute("loginError" , "Password is username & password combination<br/>");
+            res.sendRedirect("./login.jsp");
+            return;
+        }
+
+        /*if (username == null || username.equalsIgnoreCase("")) {
             wr.print(this.login("Username is required<br/>"));
             return;
         }
@@ -79,7 +95,7 @@ public class LoginAction extends HttpServlet {
 
     }
 
-    public String login(String actionError){
+    /*public String login(String actionError){
         return "<!DOCTYPE html>"
                 + "<html>"
                 + "<head>"
@@ -142,7 +158,7 @@ public class LoginAction extends HttpServlet {
                 + "Register? <a href='./register'>Register</a><br/>"
                 + "</body>"
                 + "</html>";
-    }
+    }*/
     public User login(String username, String password) {
 
         User user = null;
@@ -167,3 +183,4 @@ public class LoginAction extends HttpServlet {
 
     }
 }
+

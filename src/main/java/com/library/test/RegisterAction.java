@@ -27,10 +27,6 @@ public class RegisterAction extends HttpServlet {
 
     }
 
-    public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        res.getWriter().print(this.register(null));
-    }
-
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         PrintWriter wr = res.getWriter();
         String firstName = req.getParameter("firstName");
@@ -58,72 +54,20 @@ public class RegisterAction extends HttpServlet {
             if (password == null || password.equalsIgnoreCase(""))
                 actionError += "Password is required<br/>";
 
-            if (confirmPassword == null || confirmPassword.equalsIgnoreCase(""))
-                actionError += "Confirm password is required<br/>";
+            /*if (confirmPassword == null || confirmPassword.equalsIgnoreCase(""))
+                actionError += "Confirm password is required<br/>";*/
 
             if (password != null && confirmPassword != null && !password.equals(confirmPassword))
                 actionError += "Password & confirm password do not match<br/>";
 
+            servletCtx.setAttribute("registerError" , actionError);
             if (actionError.equals("")) {
                 this.insert(email, DigestUtils.md5Hex(password));
-                res.sendRedirect("./login");
+                res.sendRedirect("./login.jsp");
             }else
-                wr.print(this.register(actionError));
+                res.sendRedirect("./register.jsp");
         }
 
-        public String register (String actionError){
-            return "<!DOCTYPE html>"
-                    + " <html>"
-                    + "<head>"
-                    //+"<h0> Registration Page</h0> "
-                    //+" <title>"
-                    //+" Registration Page"
-                    + "<style>"
-                    //+" h1 {text-align: center;}"
-                    + "</style>"
-                    //+"</title>"
-                    + "</head>"
-                    + "<h1>" + getServletContext().getAttribute("applicationLabel") + "</h1>"
-                    + "<body bgcolor=\"violet\" style=\"margin: auto; width: 220px;\">"
-                    + "<form action=\"./register\" method=\"post\">"
-                    + "<h3 > NEW USER REGISTRATION</h3>"
-                    + "<h4> Please Enter your details to continue.....</h3> "
-                    + "<table>"
-                    + "<label> Action:</label>  "
-                    + "<input type=\"text\" name=\"action\" value=\"register\">"
-                    //+"<input type=\\\"text\\\" name=\\\"action\\\" value=\\\"register\\\">>"
-                    + "<br>"
-                    + "  <label> Firstname </label>"
-                    + "<br>"
-                    + "<input type=\"text\" name=\"firstname\" placeholder=\"First Name\">"
-                    + "<br>"
-                    + "<label> Lastname: </label>"
-                    + "<br>"
-                    + "<input type=\"text\" name=\"lastname\" placeholder=\"Last Name\">"
-                    + "<br>"
-                    + "<label> UserName: </label>"
-                    + "<input type=\"text\" name=\"username\" placeholder=\"Username\">"
-                    + "<br>"
-                    + "Email:"
-                    + "<br> <input type=\"email\" name=\"email\" placeholder =\"Email\"/> <br>"
-                    + "<label>"
-                    + " Gender :"
-                    + "</label><br>"
-                    + "<input type=\"checkbox\" name=\"female\"/> Female <br>"
-                    + "<input type=\"checkbox\" name=\"male\"/> Male <br>"
-                    + "<br>"
-                    + " Password:"
-                    + "<br> \"<input type=\"password\" name=\"password\"  placeholder=\"Password\"> <br>"
-                    + "ConfirmPassword:"
-                    + "<input type=\"password\" name=\"confirmPassword\"  placeholder=\"Confirm Password\"> <br>"
-                    + "<tr> <td> <input type=\"submit\" value=\"Submit\"></tr> "
-                    //+"<input type=\"button\" value=\"Submit\"/><br>"
-                    + "</table>"
-                    + "</form>"
-                    + "<span style=\"color:red\">" + (actionError != null ? actionError : "") + "</span>"
-                    + "</body>"
-                    + "</html>";
-        }
     public void insert(String username, String password) {
         try {
             Connection connection = (Connection) servletCtx.getAttribute("dbConnection");
