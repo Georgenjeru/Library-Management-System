@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
       <head>
-        <style>
-        </style>
       </head>
           <h1><%= application.getAttribute("applicationLabel") %></h1>
           <body bgcolor="violet" style= "margin: auto; width: 220px;">
