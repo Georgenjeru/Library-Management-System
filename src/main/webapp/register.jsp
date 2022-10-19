@@ -2,7 +2,7 @@
 <html>
       <head>
       </head>
-          <h1><%= application.getAttribute("applicationLabel") %></h1>
+          <jsp:include page = "header.jsp"/>
           <body bgcolor="violet" style= "margin: auto; width: 220px;">
               <form action= "./register" method= "post">
                    <h3 > NEW USER REGISTRATION</h3>

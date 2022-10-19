@@ -9,9 +9,9 @@
        <h6 {text-align: center;}>
      </style>
      <body>
-        <h1><%= application.getAttribute("applicationLabel") %></h1>
+        <jsp:include page = "header.jsp"/>
         Do Register <a href='./register.jsp'>Register</a><br/>
         Do Login <a href='./login.jsp'>Login</a><br/>
-        Please contactUs <a href='./contactus'>ContactUs</a><br/>
+        Please contactUs <a href='./contactus.jsp'>ContactUs</a><br/>
      </body>
 </html>

@@ -6,10 +6,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.mysql.jdbc.Connection" %>
-<%! AdminController adminController = new AdminController(); %>
-<%! BookController bookController = new BookController(); %>
 
 
+<jsp:useBean id = "adminController" class = "com.controllers.AdminController"/>
+<jsp:useBean id = "bookController" class = "com.controllers.BookController"/>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,7 @@
 <link rel= "stylesheet" type= "text/css" href= "./styles/app.css"/>
 </head>
 <body>
-<h1><%= application.getAttribute("applicationLabel") %></h1>
+<jsp:include page = "header.jsp"/>
 <h2> Welcome: <%= session.getAttribute("username") %> Logged In At: <%= session.getAttribute("loggedInTime") %></h2>
 <span style= "color:green;font-size: 24px;font-weight:bold">Logged In</span>
 <br/>Add User <a href='./admin_add.jsp'>Add User</a><br/>
@@ -38,8 +38,8 @@
                  <td><%=  admin.getEmail()  %></td>
                  <td><%=  admin.getId()  %></td>
                  <td><%=  admin.getName()  %></td>
-                 <td><a href= "./edit?prevUserId=" +  admin.getId()+ "\">Edit</a></td>
-                 <td><a href= "./delete?id=" +  admin.getId()+ "\">Delete</a></td>
+                 <td><a href="./edit?id=${admin.id}">Edit</a>  | <a href="./delete">Delete</a></td>
+
     </tr>
 
 <% } %>
@@ -64,8 +64,9 @@
                  <td><%=  book.getGenre()  %></td>
                  <td><%=  book.getTitle()  %></td>
                  <td><%=  book.getAuthor()  %></td>
-                 <td><a href= "./edit?prevUserId=" +  admin.getId()+ "\">Edit</a></td>
-                 <td><a href= "./delete?id=" +  admin.getId()+ "\">Delete</a></td>
+                 <td><a href="./edit?genre=${book.genre}">Edit</a>  | <a href="./delete">Delete</a></td>
+
+
     </tr>
 
 <% } %>

@@ -47,7 +47,7 @@ public class BookController implements Serializable {
             while (result.next()) {
                 Book book = new Book();
                 book.setGenre(result.getString("genre"));
-                book.setTitle(result.getString("tittle"));
+                book.setTitle(result.getString("title"));
                 book.setAuthor(result.getString("author"));
                 books.add(book);
             }

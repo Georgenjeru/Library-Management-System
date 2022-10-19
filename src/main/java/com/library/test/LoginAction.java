@@ -2,13 +2,10 @@ package com.library.test;
 
 import com.model.Admin;
 import com.model.User;
-import org.apache.commons.codec.digest.DigestUtils;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,9 +31,6 @@ public class LoginAction extends HttpServlet {
 
     }
     public static List<Admin> adminList;
-    /*public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        res.getWriter().print(this.login(null));
-    }*/
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
@@ -60,28 +54,14 @@ public class LoginAction extends HttpServlet {
 
         /*User user = this.login(username, password);
         if (user == null || user.getId() == null) {
-            servletCtx.setAttribute("loginError" , "Password is username & password combination<br/>");
+            servletCtx.setAttribute("loginError" , "Incorrect Password<br/>");
             res.sendRedirect("./login.jsp");
             return;
         }
-
-        /*if (username == null || username.equalsIgnoreCase("")) {
-            wr.print(this.login("Username is required<br/>"));
-            return;
-        }
-
-        if (password == null || password.equalsIgnoreCase("")) {
-            wr.print(this.login("Password is required<br/>"));
-            return;
-        }
-
-        if (!username.equals(getServletConfig().getInitParameter("username")) && !password.equals(getServletConfig().getInitParameter("password"))) {
-            wr.print(this.login("Invalid username & password combination<br/>"));
-            return;
-        }
-        /*User user = this.login(username, DigestUtils.md5Hex(password));
+        User user = this.login(username, DigestUtils.md5Hex(password));
         if (user == null || user.getId() == null) {
-            wr.print(this.login("Invalid username & password combination<br/>"));
+            servletCtx.setAttribute("loginError" , "Incorrect Password<br/>");
+            res.sendRedirect("./login.jsp");
             return;
         }*/
 
@@ -90,8 +70,6 @@ public class LoginAction extends HttpServlet {
         session.setAttribute("loggedInTime", "Logged In Time:" + new Date());
 
         res.sendRedirect("./home.jsp");
-        //RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
-        //dispatcher.forward(req, res);
 
     }
     public User login(String username, String password) {

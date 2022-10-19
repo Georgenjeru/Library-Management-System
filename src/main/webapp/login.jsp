@@ -32,7 +32,7 @@
     </style>
 
     <body>
-           <h1><%= application.getAttribute("applicationLabel") %></h1>
+           <jsp:include page = "header.jsp"/>
         <form action= "./login" method= "post">
             <div class= "bg-img">
             <div class= "content">
