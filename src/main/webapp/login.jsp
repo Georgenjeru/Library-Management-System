@@ -30,7 +30,7 @@
          .links i{font-size: 17px;}
          i span{margin-left: 8px;font-weight: 500;letter-spacing: 1px;font-size: 16px;font-family: 'Poppins',sans-serif;}
     </style>
-
+<%@ page isELIgnored="false" %>
     <body>
            <jsp:include page = "header.jsp"/>
         <form action= "./login" method= "post">
@@ -58,7 +58,8 @@
                String loginError = (String) application.getAttribute("loginError");
                if (loginError != null && !loginError.equals("")) {
         %>
-               <span style="color:red"> <%= application.getAttribute("loginError") %> </span><br/>
+              <span style="color:red">${applicationScope.loginError}</span><br/>
+
 
         <% } %>
          </div>
