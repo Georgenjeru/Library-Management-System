@@ -6,6 +6,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.mysql.jdbc.Connection" %>
+<%@ page isELIgnored="false" %>
 
 
 <jsp:useBean id = "adminController" class = "com.controllers.AdminController"/>
@@ -18,7 +19,7 @@
 </head>
 <body>
 <jsp:include page = "header.jsp"/>
-<h2> Welcome: <%= session.getAttribute("username") %> Logged In At: <%= session.getAttribute("loggedInTime") %></h2>
+<h3> Welcome: ${sessionScope.username} Logged In At: ${sessionScope.loggedInTime}</h3>
 <span style= "color:green;font-size: 24px;font-weight:bold">Logged In</span>
 <br/>Add User <a href='./admin_add.jsp'>Add User</a><br/>
 <h1> Admin </h1>
