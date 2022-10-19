@@ -1,3 +1,4 @@
+<%@ page isELIgnored="false" %>
 <jsp:include page = "header.jsp"/>
 <form action= "./contactus.jsp" method= "post">
                    <h3 > Contact Us</h3>
@@ -19,10 +20,11 @@
  <jsp:useBean id = "contactUs" class= "com.model.ContactUs" />
  <jsp:setProperty name = "contactUs" property = "*"/>
 
- <h2>
-   User Email: <jsp:getProperty name = "contactUs" property = "userEmail" /> <br/>
-   Phone Number: <jsp:getProperty name = "contactUs" property = "userPhoneNo" /> <br/>
-   Contact Message: <jsp:getProperty name = "contactUs" property = "contactMessage" /> <br/>
+ <h3>
+    User Email: ${contactUs.userEmail} <br/>
+    Phone Number: ${contactUs.userPhoneNo} <br/>
+    Contact Message: ${contactUs.contactMessage} <br/>
 
- <h2>
+
+ <h3>
 <jsp:include page = "footer.jsp"/>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
+                <%@ page isELIgnored="false" %>
                 <h1> <h1><%= application.getAttribute("applicationLabel") %></h1></h1>
                 <h2> Add User</h2>
                 <form action= "./student" method= "post">
@@ -15,7 +16,7 @@
                     String loginError = (String) application.getAttribute("addAdminError");
                     if (loginError != null && !loginError.equals("")) {
                 %>
-                    <span style="color:red"> <%= application.getAttribute("addAdminError") %> </span><br/>
+                    <span style="color:red"> ${applicationScope.loginError} </span><br/>
 
                 <% } %>
 

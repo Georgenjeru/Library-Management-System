@@ -5,5 +5,4 @@
     </head>
     <body>
     <%@ page isELIgnored="false" %>
-        <h1><%= application.getAttribute("applicationLabel") %></h1>
         <h2>${applicationScope.applicationLabel}</h2>
