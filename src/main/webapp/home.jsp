@@ -33,22 +33,22 @@
            <div class="bg-secondary rounded h-100 p-4">
                 <h6 class="mb-4">Users Table</h6>
                 <table class="table table-dark">
-                               <tr>
+                         <tr>
                                 <th>User Email</th>
                                 <th>User Identification Number</th>
                                 <th>User Name</th>
                                 <th>Options</th>
 
-                               </tr>
+                         </tr>
 
                   <%
                     List<Admin> admins = adminController.list((Connection) application.getAttribute("dbConnection"), new Admin());
-                    pageContext.setAttribute("admins", admins);
+                       pageContext.setAttribute("admins", admins);
                   %>
-                     <jc:forEach items="${admins}" var="admins">
+                     <jc:forEach items="${admins}" var="admin">
                             <tr>
                                    <td> ${admin.email} </td>
-                                   <td> ${admin.Id} </td>
+                                   <td> ${admin.id} </td>
                                    <td> ${admin.name}  </td>
                                    <td><a href="./edit?genre=${book.genre}">Edit</a>  | <a href="./delete">Delete</a></td>
 
@@ -59,62 +59,64 @@
         </div>
 
 <h1> BOOKS </h1>
-<br/>Add Books <a href='./book_add.jsp'>Add Books</a><br/>
-<div class="col-12">
-                        <div class="bg-secondary rounded h-100 p-4">
-                            <h6 class="mb-4">Bordered Table</h6>
-                            <div class="table table-bordered">
-                                <table class="table">
-<tr>
-    <th>Book Genre</th>
-    <th>Book Title</th>
-    <th>Book Author</th>
-    <th>Edit</th>
-    <th>Delete</th>
-</tr>
-<%
-    List<Book> books = bookController.list((Connection) application.getAttribute("dbConnection"), new Book());
-    for (Book book : books) {
-%>
-    <tr>
-                 <td><%=  book.getGenre()  %></td>
-                 <td><%=  book.getTitle()  %></td>
-                 <td><%=  book.getAuthor()  %></td>
-                 <td><a href="./edit?genre=${book.genre}">Edit</a>  | <a href="./delete">Delete</a></td>
-
-
-    </tr>
-
-<% } %>
-</table>
+           <br/>Add Books <a href='./book_add.jsp'>Add Books</a><br/>
+               <div class="col-12">
+                    <div class="bg-secondary rounded h-100 p-4">
+                        <h6 class="mb-4">Bordered Table</h6>
+                           <div class="table table-bordered">
+                              <table class="table">
+                                 <tr>
+                                    <th>Book Genre</th>
+                                    <th>Book Title</th>
+                                    <th>Book Author</th>
+                                    <th>Options</th>
+                                 </tr>
+                                  <%
+                                    List<Book> books = bookController.list((Connection) application.getAttribute("dbConnection"), new Book());
+                                     pageContext.setAttribute("books", books);
+                                  %>
+                                   <jc:forEach items="${books}" var="book">
+                                      <tr>
+                                        <td> ${book.genre} </td>
+                                        <td> ${book.title} </td>
+                                        <td> ${book.author} </td>
+                                        <td><a href="./edit?genre=${book.genre}">Edit</a>  | <a href="./delete">Delete</a></td>
+                                      </tr>
+                                   </jc:forEach>
+                              </table>
+                           </div>
+                    </div>
+               </div>
 
 <h1> ISSUE </h1>
-<br/>Add Issue details <a href='./issue.jsp'>Issue Details</a><br/>
-<div class="col-12">
-                        <div class="bg-secondary rounded h-100 p-4">
-                            <h6 class="mb-4">Bordered Table</h6>
-                            <div class="table table-dark">
-                                <table class="table">
-<tr>
-    <th>Book Id</th>
-    <th>User Id</th>
-    <th>Period</th>
-    <th>Edit</th>
-    <th>Delete</th>
-</tr>
-<%
-    List<Issue> issues = issueController.list((Connection) application.getAttribute("dbConnection"), new Issue());
-       for (Issue issue : issues) {
-%>
-    <tr>
-                 <td><%=  issue.getBookId()  %></td>
-                 <td><%=  issue.getUserId()  %></td>
-                 <td><%=  issue.getPeriod()  %></td>
-                 <td><a href="./edit?bookId=${issue.bookId}">Edit</a>  | <a href="./delete">Delete</a></td>
-    </tr>
-
-<% } %>
-</table>
+      <br/>Add Issue details <a href='./issue.jsp'>Issue Details</a><br/>
+           <div class="col-12">
+                     <div class="bg-secondary rounded h-100 p-4">
+                          <h6 class="mb-4">Bordered Table</h6>
+                          <div class="table table-dark">
+                            <table class="table">
+                                <tr>
+                                  <th>Book Id</th>
+                                  <th>User Id</th>
+                                  <th>Period</th>
+                                  <th>Options</th>
+                                </tr>
+                                  <%
+                                    List<Issue> issues = issueController.list((Connection) application.getAttribute("dbConnection"), new Issue());
+                                     pageContext.setAttribute("issues", issues);
+                                  %>
+                                   <jc:forEach items="${issues}" var="issue">
+                                      <tr>
+                                        <td> ${issue.bookId} </td>
+                                        <td> ${issue.userId} </td>
+                                        <td> ${issue.period} </td>
+                                        <td><a href="./edit?genre=${book.genre}">Edit</a>  | <a href="./delete">Delete</a></td>
+                                      </tr>
+                                   </jc:forEach>
+                            </table>
+                          </div>
+                     </div>
+           </div>
 
 <br/>Logout <a href='./logout'>Logout</a><br/>
 </body>
