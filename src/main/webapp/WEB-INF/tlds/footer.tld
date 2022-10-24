@@ -1,0 +1,10 @@
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>1.2</jsp-version>
+    <short-name>footer</short-name>
+    <tag>
+        <name>Footer</name>
+        <tag-class>com.customtags.FooterTag</tag-class>
+        <body-content>scriptless</body-content>
+    </tag>
+</taglib>
