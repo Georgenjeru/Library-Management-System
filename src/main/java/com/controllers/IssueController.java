@@ -2,10 +2,11 @@ package com.controllers;
 
 
 import com.model.Issue;
-import com.mysql.jdbc.Connection;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;

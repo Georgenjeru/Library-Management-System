@@ -1,117 +1,57 @@
-package com.library.test;
+package com.archives;
 
 
 import javax.servlet.*;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Cookie;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
-import java.util.Map;
 
-
-public class HttpResponseSample extends HttpServlet {
+public class InitialHome extends HttpServlet {
 
     ServletConfig config = null;
 
-    /*public static void addCookie(HttpServletResponse response, String name, String value, int maxAge) {
-        Cookie cookie = new Cookie(name, value);
-        cookie.setMaxAge(maxAge);
-        response.addCookie(cookie);
-    }*/
 
 
-    @Override
-    public void doGet(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServletException, IOException {
-        String action = servletRequest.getParameter("action");
+    public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        String action = req.getParameter("action");
 
-        String name = servletRequest.getParameter("name");
-        System.out.println(name);
 
-        Enumeration<String> enumHeader = servletRequest.getHeaderNames();
 
-        while (enumHeader.hasMoreElements()) {
-            String nameHeader = (String) enumHeader.nextElement();
-            String valueHeader = servletRequest.getHeader(nameHeader);
-            System.out.println("Header Name" + nameHeader + " :" + "and it's value is" + valueHeader);
-        }
-
-        int status = servletResponse.getStatus();
-        System.out.println("status" + status);
-        System.out.println("the header name of the response");
-
-        servletResponse.setIntHeader("Refresh", 15);
-
-         //HttpResponse Methods.
-        servletResponse.setContentType("text/html");
-        servletResponse.setCharacterEncoding("UTF-8");
-        System.out.println("committed : " + servletResponse.isCommitted());
-        System.out.println("locale : " + servletResponse.getLocale());
-        System.out.println("outputStream " + servletResponse.getOutputStream());
-        System.out.println("character encoding " + servletResponse.getCharacterEncoding());
-        System.out.println("content type  " + servletResponse.getContentType());
-        System.out.println("BufferSize ==" + servletResponse.getBufferSize());
-
-        PrintWriter wr = servletResponse.getWriter();
-
+        PrintWriter wr = res.getWriter();
         if (action != null && action.equalsIgnoreCase("register"))
             wr.print(this.register(null));
-
         else if (action != null && action.equalsIgnoreCase("login"))
             wr.print(this.login(null));
-        else if (action != null && action.equalsIgnoreCase("contactus"))
+        else if (action != null && action.equalsIgnoreCase("contactus")) {
             wr.println(this.contactUs(null));
-        else
+        } else
             wr.print(this.home());
-
     }
 
-
-    public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException, ServletException {
-
-        System.out.println("the parameters are");
-
-        int status = res.getStatus();
-        System.out.println("and their status are" + status);
-        Enumeration<String>  namesForm = req.getParameterNames();
-        while (namesForm.hasMoreElements()){
-            String field = namesForm.nextElement();
-            System.out.println("Field name :" + field +" the value is : " + req.getParameterValues(field)[0] );
-
-        }
-        Map<String, String[]> stringMap = req.getParameterMap();
-        for (Map.Entry<String,String[]> map : stringMap.entrySet()){
-            if (map.getValue() != null && map.getValue().length > 0)
-                System.out.println(map.getKey() + "--" + map.getValue()[0]);
-        }
+    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         PrintWriter wr = res.getWriter();
         String action = req.getParameter("action");
         String firstName = req.getParameter("firstName");
-        String secondName = req.getParameter("lastName");
+        String secondName = req.getParameter("secondName");
         String userName = req.getParameter("userName");
         String email = req.getParameter("email");
         String gender = req.getParameter("gender");
         String contactusMessage = req.getParameter("contactusMessage");
-        String password = req.getParameter("Password");
-        String confirmPassword = req.getParameter("ConfirmPassword");
+        String password = req.getParameter("password");
+        String confirmPassword = req.getParameter("confirmPassword");
+
 
         boolean register = action != null && action.equalsIgnoreCase("register");
         boolean login = action != null && action.equalsIgnoreCase("login");
         boolean contactus = action != null && action.equalsIgnoreCase("contactUs");
         boolean messageSent = action != null && action.equalsIgnoreCase("messageSent");
 
-
-        Cookie cookie = new Cookie("cookieSample",userName);
-        cookie.setMaxAge(365 * 24 * 60 * 60); // an year
-        res.addCookie(cookie);
-
-
         String actionError = "";
-
-        if (register){
+        if (register) {
             System.out.println("First Name: " + firstName);
             System.out.println("Second Name: " + secondName);
             System.out.println("User Name: " + userName);
@@ -119,8 +59,6 @@ public class HttpResponseSample extends HttpServlet {
             System.out.println("Gender:" + gender);
             System.out.println("Password: " + password);
             System.out.println("Confirm Password: " + confirmPassword);
-
-            this.login(actionError);
 
             if (email == null || email.equalsIgnoreCase(""))
                 actionError = "Email is required<br/>";
@@ -138,6 +76,7 @@ public class HttpResponseSample extends HttpServlet {
                 wr.print(this.home());
             else
                 wr.print(this.register(actionError));
+
         } else if (login) {
             System.out.println("userName: " + userName);
             System.out.println("Password: " + password);
@@ -152,7 +91,7 @@ public class HttpResponseSample extends HttpServlet {
                 actionError += "Invalid password<br/>";
 
             if (actionError.equals(""))
-                wr.print(this.loggedIn());
+                wr.print(this.loggedIn(userName));
             else
                 wr.print(this.login(actionError));
 
@@ -168,9 +107,13 @@ public class HttpResponseSample extends HttpServlet {
             System.out.println("message received.");
 
         }
-
     }
 
+    public static void addCookie(HttpServletResponse response, String name, String value, int maxAge) {
+        Cookie cookie = new Cookie(name, value);
+        cookie.setMaxAge(maxAge);
+        response.addCookie(cookie);
+    }
 
 
     public String home() {
@@ -324,74 +267,74 @@ public class HttpResponseSample extends HttpServlet {
     }
 
     public String contactUs(String actionError) {
-        return "<!DOCTYPE html>"
-                + "<html> "
-                + "<head> "
-                + "<title>Help Page</title>"
-                + "</head>"
-                + "<style>"
-                + "*{color:#ececec; background-color: #142d4c}"
-                + "h2{text-align:center}"
-                + "h5{text-align:center}"
-                + "import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Poppins:400,500&display=swap');"
-                + "*{margin: 0;padding: 0;box-sizing: border-box;user-select: none;}"
-                + ".bg-img{background: url('bg.jpg');height: 100vh;background-size: cover;background-position: center;}"
-                + ".bg-img:after{position: absolute;content: '';top: 0;left: 0;height: 100%;width: 100%;background-color: #FFFF00;}"
-                + ".content{position: absolute;top: 50%;left: 50%; z-index: 999; text-align: center; padding: 60px 32px;width: 370px;transform: translate(-50%,-50%); background: rgba(255,255,255,0.04);box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);}"
-                + "tt,.content header{color: white;font-size: 33px;font-weight: 600;margin: 0 0 35px 0;font-family: 'Montserrat',sans-serif;}"+
-                ".field{position: relative;height: 45px;width: 100%;display: flex;background: rgba(255,255,255,0.94);}"
-                + ".field span{ color: #222;width: 40px;line-height: 45px;}"
-                + ".field input{height: 100%; width: 100%;background: transparent; border: none;outline: none; color: #222;font-size: 16px; font-family: 'Poppins',sans-serif;}"+
-                ".space{margin-top: 16px;}"
-                + ".show{position: absolute;right: 13px;font-size: 13px;font-weight: 700;color: #222;display: none;cursor: pointer;font-family: 'Montserrat',sans-serif;}"+
-                ".pass-key:valid ~ .show{display: block;}"
-                + ".pass{text-align: left;margin: 10px 0;}"
-                + ".pass a{color: white;text-decoration: none;font-family: 'Poppins',sans-serif;}"
-                + ".pass:hover a{text-decoration: underline;}"
-                + ".field input[type=\"submit\"]{background: #3498db;border: 1px solid #2691d9;color: grey;font-size: 18px;letter-spacing: 1px;font-weight: 600;cursor: pointer;font-family: 'Montserrat',sans-serif;}"
-                + ".field input[type=\"submit\"]:hover{background: #2691d9;}"
-                + ".login{color: white;margin: 20px 0;font-family: 'Poppins',sans-serif;}"
-                + ".links{display: flex;cursor: pointer;color: white;margin: 0 0 20px 0;}"+
-                ".links i{font-size: 17px;}"+
-                "i span{margin-left: 8px;font-weight: 500;letter-spacing: 1px;font-size: 16px;font-family: 'Poppins',sans-serif;}"+
-                "</style>"
-                + "<body>"
-                +"<div class=\"bg-img\">"
-                +"<div class=\"content\">"
-                +"<header>Library Help Page</header>"
-                + "<form action=\"./project\" method=\"post\">"
-                +"<div class=\"field\">"
-                +"<input type=\"text\" name=\"action\" value=\"inquiry\">"
-                +"</div>"
-                +"<div class=\"field space\">"
-                + "<input type=\"text\" name=\"firstname\" required placeholder=\"First Name\">"
-                +"</div>"
-                +"<div class=\"field space\">"
-                + "<input type=\"text\" name=\"username\" required placeholder=\"User Name\">"
-                +"</div>"
-                +"<div class=\"field space\">"
-                + "<input type=\"text\" name=\"email\" required placeholder=\"Email\">"
-                +"</div>"
-                +"<div class=\"field space\">"
-                + "<input type=\"text\" name=\"contactusMessage\" placeholder=\"contactusMessage\">"
-                +"</div>"
+      return "<!DOCTYPE html>"
+              + "<html> "
+              + "<head> "
+              + "<title>Help Page</title>"
+              + "</head>"
+              + "<style>"
+              + "*{color:#ececec; background-color: #142d4c}"
+              + "h2{text-align:center}"
+              + "h5{text-align:center}"
+              + "import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Poppins:400,500&display=swap');"
+              + "*{margin: 0;padding: 0;box-sizing: border-box;user-select: none;}"
+              + ".bg-img{background: url('bg.jpg');height: 100vh;background-size: cover;background-position: center;}"
+              + ".bg-img:after{position: absolute;content: '';top: 0;left: 0;height: 100%;width: 100%;background-color: #FFFF00;}"
+              + ".content{position: absolute;top: 50%;left: 50%; z-index: 999; text-align: center; padding: 60px 32px;width: 370px;transform: translate(-50%,-50%); background: rgba(255,255,255,0.04);box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);}"
+              + "tt,.content header{color: white;font-size: 33px;font-weight: 600;margin: 0 0 35px 0;font-family: 'Montserrat',sans-serif;}"+
+              ".field{position: relative;height: 45px;width: 100%;display: flex;background: rgba(255,255,255,0.94);}"
+              + ".field span{ color: #222;width: 40px;line-height: 45px;}"
+              + ".field input{height: 100%; width: 100%;background: transparent; border: none;outline: none; color: #222;font-size: 16px; font-family: 'Poppins',sans-serif;}"+
+              ".space{margin-top: 16px;}"
+              + ".show{position: absolute;right: 13px;font-size: 13px;font-weight: 700;color: #222;display: none;cursor: pointer;font-family: 'Montserrat',sans-serif;}"+
+              ".pass-key:valid ~ .show{display: block;}"
+              + ".pass{text-align: left;margin: 10px 0;}"
+              + ".pass a{color: white;text-decoration: none;font-family: 'Poppins',sans-serif;}"
+              + ".pass:hover a{text-decoration: underline;}"
+              + ".field input[type=\"submit\"]{background: #3498db;border: 1px solid #2691d9;color: grey;font-size: 18px;letter-spacing: 1px;font-weight: 600;cursor: pointer;font-family: 'Montserrat',sans-serif;}"
+              + ".field input[type=\"submit\"]:hover{background: #2691d9;}"
+              + ".login{color: white;margin: 20px 0;font-family: 'Poppins',sans-serif;}"
+              + ".links{display: flex;cursor: pointer;color: white;margin: 0 0 20px 0;}"+
+              ".links i{font-size: 17px;}"+
+              "i span{margin-left: 8px;font-weight: 500;letter-spacing: 1px;font-size: 16px;font-family: 'Poppins',sans-serif;}"+
+              "</style>"
+              + "<body>"
+              +"<div class=\"bg-img\">"
+              +"<div class=\"content\">"
+              +"<header>Library Help Page</header>"
+              + "<form action=\"./project\" method=\"post\">"
+              +"<div class=\"field\">"
+              +"<input type=\"text\" name=\"action\" value=\"inquiry\">"
+              +"</div>"
+              +"<div class=\"field space\">"
+              + "<input type=\"text\" name=\"firstname\" required placeholder=\"First Name\">"
+              +"</div>"
+              +"<div class=\"field space\">"
+              + "<input type=\"text\" name=\"username\" required placeholder=\"User Name\">"
+              +"</div>"
+              +"<div class=\"field space\">"
+              + "<input type=\"text\" name=\"email\" required placeholder=\"Email\">"
+              +"</div>"
+              +"<div class=\"field space\">"
+              + "<input type=\"text\" name=\"contactusMessage\" placeholder=\"contactusMessage\">"
+              +"</div>"
 
-                +"<div class=\"field space\">"
-                + "<tr> <td> <input type=\"submit\" value=\"Send \"></tr> "
-                +"</div>"
-                + "</form>"
-                + "<span style=\"color:yellow\">" + (actionError != null? actionError : "") + "</span>"
-                +"</div>"
-                +"</div>"
-                + "</body>"
-                + "</html>";
+              +"<div class=\"field space\">"
+              + "<tr> <td> <input type=\"submit\" value=\"Send \"></tr> "
+              +"</div>"
+              + "</form>"
+              + "<span style=\"color:yellow\">" + (actionError != null? actionError : "") + "</span>"
+              +"</div>"
+              +"</div>"
+              + "</body>"
+              + "</html>";
     }
 
-    public String loggedIn(){
+    public String loggedIn(String username){
         return "<!DOCTYPE html>"
                 + "<html> "
                 + "<head> "
-                //+ "<h1> Logged In User: " + username + "</h1>"
+                + "<h1> Logged In User: " + username + "</h1>"
                 + "</head>"
                 + "<body>"
                 + "<span style=\"color:green;font-size: 24px;font-weight:bold\">Logged In</span>"
@@ -399,5 +342,3 @@ public class HttpResponseSample extends HttpServlet {
                 + "</html>";
     }
 }
-
-

@@ -2,7 +2,7 @@ package com.actions;
 
 import com.controllers.AdminController;
 import com.model.Admin;
-import com.mysql.jdbc.Connection;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import javax.servlet.ServletConfig;
@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 
 @WebServlet("/student")
 public class AdminAction extends HttpServlet {

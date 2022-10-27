@@ -7,18 +7,21 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.mysql.jdbc.Connection" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jc" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ page isELIgnored="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
+<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
 
+
+
+<cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
 <jsp:useBean id = "adminController" class = "com.controllers.AdminController"/>
 <jsp:useBean id = "bookController" class = "com.controllers.BookController"/>
 <jsp:useBean id = "issueController" class = "com.controllers.IssueController"/>
 
 
-<jsp:include page = "header.jsp"/>
 <%@ page isELIgnored="false" %>
 <jsp:include page = "dashboard.jsp"/>
 
@@ -26,6 +29,7 @@
 <body>
 <h3> Welcome: ${sessionScope.username} Logged In At: ${sessionScope.loggedInTime}</h3>
 <span style= "color:green;font-size: 24px;font-weight:bold">Logged In</span>
+
 
 <br/>Add User <a href='./admin_add.jsp'>Add User</a><br/>
 <h1> Admin </h1>
@@ -47,10 +51,11 @@
                   %>
                      <jc:forEach items="${admins}" var="admin">
                             <tr>
-                                   <td> ${admin.email} </td>
+                                   <td> ${fn:trim(admin.email)} </td>
                                    <td> ${admin.id} </td>
-                                   <td> ${admin.name}  </td>
-                                   <td><a href="./edit?genre=${book.genre}">Edit</a>  | <a href="./delete">Delete</a></td>
+                                   <td> ${fn:toLowerCase(admin.name)}  </td>
+                                   <td><a href="./edit?genre=${book.genre}">Edit</a></td>
+                                    <td><a href="./delete?adminId=${admin.id}"}>Delete</a></td>
 
                              </tr>
                      </jc:forEach>
@@ -77,9 +82,9 @@
                                   %>
                                    <jc:forEach items="${books}" var="book">
                                       <tr>
-                                        <td> ${book.genre} </td>
+                                        <td> ${fn:length(book.genre)} </td>
                                         <td> ${book.title} </td>
-                                        <td> ${book.author} </td>
+                                        <td> ${fn:toUpperCase(book.author)} </td>
                                         <td><a href="./edit?genre=${book.genre}">Edit</a>  | <a href="./delete">Delete</a></td>
                                       </tr>
                                    </jc:forEach>
@@ -119,5 +124,4 @@
            </div>
 
 <br/>Logout <a href='./logout'>Logout</a><br/>
-</body>
-</html>
+ <cft:Footer>&copy; <a href="#">George lms</a>, All Right Reserved.  </cft:Footer>

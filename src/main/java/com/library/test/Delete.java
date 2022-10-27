@@ -23,11 +23,11 @@ public class Delete extends HttpServlet {
         System.out.println("userId: " + userId);
 
         HttpSession session = req.getSession();
-        List<Admin> users = (List<Admin>) session.getAttribute("users");
+        List<Admin> admins = (List<Admin>) session.getAttribute("admins");
 
-        for (Admin admin: users){
+        for (Admin admin: admins){
             if (userId.equalsIgnoreCase(admin.getId())) {
-                users.remove(admin);
+                admins.remove(admin);
                 break;
             }
 

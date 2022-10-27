@@ -4,9 +4,12 @@ package com.customtags;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
+import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 public class HeaderTag extends SimpleTagSupport {
+
+    private String applicationLabel;
 
     public void doTag() throws JspException, IOException {
         JspWriter out = getJspContext().getOut();
@@ -14,7 +17,7 @@ public class HeaderTag extends SimpleTagSupport {
                 "<html>"+
                 "<head>"+
                 "<meta charset=\"utf-8\">"+
-                "<title>Library Management System</title>"+
+                "<title> "+ applicationLabel +" </title>"+
                 "<meta content=\"width=device-width, initial-scale=1.0\" name=\"viewport\">"+
 
 
@@ -30,11 +33,19 @@ public class HeaderTag extends SimpleTagSupport {
                 "<link href=\"lib/owlcarousel/assets/owl.carousel.min.css\" rel=\"stylesheet\">"+
                 "<link href=\"lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css\" rel=\"stylesheet\" />"+
 
-                "<link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">"+
+                "<link href=\"./css/bootstrap.min.css\" rel=\"stylesheet\">"+
 
-                "<link href=\"css/style.css\" rel=\"stylesheet\">"+
+                "<link href=\"./css/style.css\" rel=\"stylesheet\">"+
                 "</head>"+
 
                 "<body>");
+    }
+
+    public String getApplicationLabel() {
+        return applicationLabel;
+    }
+
+    public void setApplicationLabel(String applicationLabel) {
+        this.applicationLabel = applicationLabel;
     }
 }

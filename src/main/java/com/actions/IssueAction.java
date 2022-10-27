@@ -3,7 +3,7 @@ package com.actions;
 
 import com.controllers.IssueController;
 import com.model.Issue;
-import com.mysql.jdbc.Connection;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import javax.servlet.ServletConfig;
@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 
 @WebServlet("/issue")
 public class IssueAction extends HttpServlet {

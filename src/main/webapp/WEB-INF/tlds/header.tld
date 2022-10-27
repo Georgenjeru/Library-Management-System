@@ -5,6 +5,12 @@
     <tag>
         <name>Header</name>
         <tag-class>com.customtags.HeaderTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>applicationLabel</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
 </taglib>
+

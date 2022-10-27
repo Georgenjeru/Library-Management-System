@@ -1,8 +1,9 @@
 package com.library.test;
 
 
-import com.mysql.jdbc.Connection;
+
 import org.apache.commons.codec.digest.DigestUtils;
+import java.sql.Connection;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;

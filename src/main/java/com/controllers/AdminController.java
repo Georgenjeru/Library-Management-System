@@ -1,10 +1,10 @@
 package com.controllers;
 
 import com.model.Admin;
-import com.mysql.jdbc.Connection;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -27,11 +27,18 @@ public class AdminController implements Serializable {
 
     }
 
-    public void delete(Admin admin) {
+    public void delete(Connection connection, Admin admin) {
+        try{
+            Statement sqlStmt = connection.createStatement();
+            sqlStmt.executeUpdate("delete from  users  where Id='" + admin.getId() + "'");
+
+        }
+        catch(Exception ex1)
+        {ex1.printStackTrace();}
 
     }
 
-    public void update(Admin admin) {
+    public void update(Connection connection, Admin admin) {
 
     }
 

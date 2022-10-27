@@ -6,8 +6,9 @@
 <%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
 <%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
-<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
-<cht:Header></cht:Header>
+
+<cht:Header applicationLabel="${applicationScope.applicationLabel}" />
+
 
 
      <head>
@@ -24,4 +25,4 @@
         Do Login <a href='./login.jsp'>Login</a><br/>
         Please contactUs <a href='./contactus.jsp'>ContactUs</a><br/>
 
- <cft:Footer> </cft:Footer>
+ <cft:Footer>&copy; <a href="#">George lms</a>, All Right Reserved. </cft:Footer>

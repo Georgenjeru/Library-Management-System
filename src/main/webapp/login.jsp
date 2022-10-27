@@ -1,10 +1,15 @@
 <%@ page isELIgnored="false" %>
-<jsp:include page = "header.jsp"/>
+<%@ taglib prefix="jc" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="cht" uri="./WEB-INF/tlds/header.tld" %>
+<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
 
 
-    <body>
 
-           <jsp:include page = "header.jsp"/>
+<cht:Header applicationLabel="${applicationScope.applicationLabel}" ></cht:Header>
+
            <div class="container-fluid position-relative d-flex p-0">
            <div class="container-fluid">
                        <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
@@ -14,7 +19,7 @@
                                        <a href="index.html" class="">
                                            <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Library</h3>
                                        </a>
-                                          <h2>${applicationScope.applicationLabel}</h2>
+                                          <h2>Enter Your Details</h2>
                                    </div>
                                    <form action= "./login" method= "post">
                                       <div class="form-floating mb-3">
@@ -42,5 +47,4 @@
 
         <% } %>
 
-    </body>
-</html>
+<cft:Footer>&copy; <a href="#">George lms</a>, All Right Reserved. </cft:Footer>

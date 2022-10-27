@@ -1,4 +1,4 @@
-package com.library.test;
+package com.archives;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServlet;

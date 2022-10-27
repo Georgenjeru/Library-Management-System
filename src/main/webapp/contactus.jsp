@@ -1,5 +1,10 @@
 <%@ page isELIgnored="false" %>
-<jsp:include page = "header.jsp"/>
+<%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
+<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
+<%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
+<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
+<cht:Header></cht:Header>
+
 <form action= "./contactus.jsp" method= "post">
                    <h3 > Contact Us</h3>
                  <table>
@@ -27,4 +32,4 @@
 
 
  <h3>
-<jsp:include page = "footer.jsp"/>
+<cft:Footer> &copy; <a href="#">George lms</a>, All Right Reserved. </cft:Footer>

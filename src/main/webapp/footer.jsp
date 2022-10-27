@@ -1,3 +1,3 @@
 
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
-<cft:Footer> George Library Management System</cft:Footer>
+<cft:Footer> &copy; <a href="#">George lms</a>, All Right Reserved. </cft:Footer>
