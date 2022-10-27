@@ -5,6 +5,8 @@ import com.model.Issue;
 
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,13 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IssueController implements Serializable {
-    public void add(Connection connection, Issue issue) {
+
+    @Resource(lookup = "java:jboss/datasources/library")
+    DataSource dataSource;
+    public void add(Issue issue) {
         if (issue == null || StringUtils.isBlank(issue.getBookId()) || StringUtils.isBlank(issue.getUserId()))
             return;
 
         try {
-
-            Statement sqlStmt = connection.createStatement();
+            Statement sqlStmt = dataSource.getConnection().createStatement();
             sqlStmt.executeUpdate("insert into issues(bookId, userId, period) " +
                     "values('" + issue.getBookId() + "','" + issue.getUserId() +  "','" + issue.getPeriod() + "')");
 
@@ -38,12 +42,11 @@ public class IssueController implements Serializable {
 
     }
 
-    public List<Issue> list(Connection connection, Issue filter) {
+    public List<Issue> list(Issue filter) {
         List<Issue> issues = new ArrayList<Issue>();
 
         try {
-            Statement sqlStmt = connection.createStatement();
-
+            Statement sqlStmt = dataSource.getConnection().createStatement();
             ResultSet result = sqlStmt.executeQuery("select * from issues");
             while (result.next()) {
                 Issue issue = new Issue();

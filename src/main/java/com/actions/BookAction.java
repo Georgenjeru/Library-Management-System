@@ -4,6 +4,8 @@ import com.controllers.BookController;
 import com.model.Book;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,6 +19,10 @@ import java.sql.Connection;
 
 @WebServlet("/book")
 public class BookAction extends HttpServlet {
+
+    @Inject
+    BookController bookController;
+
     ServletContext servletCtx = null;
 
     public void init(ServletConfig config) throws ServletException {
@@ -58,8 +64,7 @@ public class BookAction extends HttpServlet {
             return;
         }
 
-        BookController bookController = new BookController();
-        bookController.add((Connection) servletCtx.getAttribute("dbConnection"), book);
+        bookController.add(book);
 
         res.sendRedirect("./home.jsp");
 

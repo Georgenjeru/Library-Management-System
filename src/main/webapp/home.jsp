@@ -46,8 +46,9 @@
                          </tr>
 
                   <%
-                    List<Admin> admins = adminController.list((Connection) application.getAttribute("dbConnection"), new Admin());
-                       pageContext.setAttribute("admins", admins);
+                     List<Admin> admins = adminController.list(new Admin());
+                        pageContext.setAttribute("admins", admins);
+
                   %>
                      <jc:forEach items="${admins}" var="admin">
                             <tr>
@@ -77,8 +78,9 @@
                                     <th>Options</th>
                                  </tr>
                                   <%
-                                    List<Book> books = bookController.list((Connection) application.getAttribute("dbConnection"), new Book());
-                                     pageContext.setAttribute("books", books);
+                                     List<Book> books = bookController.list(new Book());
+                                       pageContext.setAttribute("books", books);
+
                                   %>
                                    <jc:forEach items="${books}" var="book">
                                       <tr>
@@ -107,8 +109,9 @@
                                   <th>Options</th>
                                 </tr>
                                   <%
-                                    List<Issue> issues = issueController.list((Connection) application.getAttribute("dbConnection"), new Issue());
-                                     pageContext.setAttribute("issues", issues);
+                                    List<Issue> issues = issueController.list(new Issue());
+                                        pageContext.setAttribute("issues", issues);
+
                                   %>
                                    <jc:forEach items="${issues}" var="issue">
                                       <tr>

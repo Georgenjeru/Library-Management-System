@@ -3,6 +3,8 @@ package com.controllers;
 import com.model.Admin;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,13 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminController implements Serializable {
-    public void add(Connection connection, Admin admin) {
+
+    @Resource(lookup = "java:jboss/datasources/library")
+    DataSource dataSource;
+
+    public void add(Admin admin) {
         if (admin == null || StringUtils.isBlank(admin.getName()) || StringUtils.isBlank(admin.getId()))
             return;
 
         try {
 
-            Statement sqlStmt = connection.createStatement();
+            Statement sqlStmt = dataSource.getConnection().createStatement();
             sqlStmt.executeUpdate("insert into users(Id, Name, Email) " +
                     "values('" + admin.getId() + "','" + admin.getName() +  "','" + admin.getEmail() + "')");
 
@@ -27,9 +33,10 @@ public class AdminController implements Serializable {
 
     }
 
-    public void delete(Connection connection, Admin admin) {
+    public void delete(Admin admin) {
         try{
-            Statement sqlStmt = connection.createStatement();
+
+            Statement sqlStmt = dataSource.getConnection().createStatement();
             sqlStmt.executeUpdate("delete from  users  where Id='" + admin.getId() + "'");
 
         }
@@ -42,11 +49,13 @@ public class AdminController implements Serializable {
 
     }
 
-    public List<Admin> list(Connection connection, Admin filter) {
+    public List<Admin> list( Admin filter) {
         List<Admin> admins = new ArrayList<Admin>();
 
         try {
-            Statement sqlStmt = connection.createStatement();
+
+            Statement sqlStmt = dataSource.getConnection().createStatement();
+
 
             ResultSet result = sqlStmt.executeQuery("select * from users");
             while (result.next()) {

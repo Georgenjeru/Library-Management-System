@@ -6,6 +6,8 @@ import com.model.Issue;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,6 +21,9 @@ import java.sql.Connection;
 
 @WebServlet("/issue")
 public class IssueAction extends HttpServlet {
+
+    @Inject
+    IssueController issueController;
     ServletContext servletCtx = null;
 
     public void init(ServletConfig config) throws ServletException {
@@ -60,8 +65,7 @@ public class IssueAction extends HttpServlet {
             return;
         }
 
-        IssueController issueController = new IssueController();
-        issueController.add((Connection) servletCtx.getAttribute("dbConnection"), issue);
+        issueController.add(issue);
 
         res.sendRedirect("./home.jsp");
 

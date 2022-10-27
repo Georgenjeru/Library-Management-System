@@ -5,6 +5,8 @@ import com.model.Admin;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,6 +20,9 @@ import java.sql.Connection;
 
 @WebServlet("/student")
 public class AdminAction extends HttpServlet {
+
+    @Inject
+    AdminController adminController;
     ServletContext servletCtx = null;
 
     public void init(ServletConfig config) throws ServletException {
@@ -56,8 +61,7 @@ public class AdminAction extends HttpServlet {
             res.sendRedirect("./admin_add.jsp");
             return;
         }
-        AdminController adminController = new AdminController();
-        adminController.add((Connection) servletCtx.getAttribute("dbConnection"), admin);
+        adminController.add(admin);
 
         res.sendRedirect("./home.jsp");
 

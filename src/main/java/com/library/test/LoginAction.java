@@ -1,8 +1,10 @@
 package com.library.test;
 
+import com.controllers.LoginController;
 import com.model.Admin;
 import com.model.User;
 
+import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -13,14 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/login")
 public class LoginAction extends HttpServlet {
+
+    @Inject
+    LoginController loginController;
 
     ServletContext servletCtx = null;
 
@@ -63,6 +65,12 @@ public class LoginAction extends HttpServlet {
             servletCtx.setAttribute("loginError" , "Incorrect Password<br/>");
             res.sendRedirect("./login.jsp");
             return;
+        }
+        User user = loginController.login(username, password);
+        if (user == null || user.getId() == null) {
+            servletCtx.setAttribute("loginError" , "Incorrect Password<br/>");
+            res.sendRedirect("./login.jsp");
+            return;
         }*/
 
         HttpSession session = req.getSession(true);
@@ -72,28 +80,6 @@ public class LoginAction extends HttpServlet {
         res.sendRedirect("./home.jsp");
 
     }
-    public User login(String username, String password) {
 
-        User user = null;
-
-        try {
-            Connection connection = (Connection) servletCtx.getAttribute("dbConnection");
-            Statement sqlStmt = connection.createStatement();
-
-            ResultSet result = sqlStmt.executeQuery("select * from userlogin where username='" + username + "' and " +
-                    "password='" + password + "'");
-            while (result.next()) {
-                user = new User();
-                user.setId((long) result.getInt("id"));
-                user.setUsername(result.getString("username"));
-            }
-
-        }catch (Exception ex) {
-            System.out.println("Log In Error: " + ex.getMessage());
-        }
-
-        return user;
-
-    }
 }
 

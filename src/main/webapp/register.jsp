@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html>
-      <head>
-      </head>
-          <jsp:include page = "header.jsp"/>
+<%@ taglib prefix="cht" uri="./WEB-INF/tlds/header.tld" %>
+<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
+
+
+
+<cht:Header applicationLabel="${applicationScope.applicationLabel}" ></cht:Header>
+
           <body bgcolor="violet" style= "margin: auto; width: 220px;">
               <form action= "./register" method= "post">
                    <h3 > NEW USER REGISTRATION</h3>

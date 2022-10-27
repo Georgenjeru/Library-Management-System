@@ -4,6 +4,8 @@ package com.controllers;
 import com.model.Book;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,13 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookController implements Serializable {
-    public void add(Connection connection, Book book) {
+
+    @Resource(lookup = "java:jboss/datasources/library")
+    DataSource dataSource;
+    public void add(Book book) {
         if (book == null || StringUtils.isBlank(book.getTitle()) || StringUtils.isBlank(book.getAuthor()))
             return;
 
         try {
 
-            Statement sqlStmt = connection.createStatement();
+            Statement sqlStmt = dataSource.getConnection().createStatement();
+
             sqlStmt.executeUpdate("insert into books(genre, title, author) " +
                     "values('" + book.getGenre() + "','" + book.getTitle() +  "','" + book.getAuthor() + "')");
 
@@ -37,11 +43,12 @@ public class BookController implements Serializable {
 
     }
 
-    public List<Book> list(Connection connection, Book filter) {
+    public List<Book> list(Book filter) {
         List<Book> books = new ArrayList<Book>();
 
         try {
-            Statement sqlStmt = connection.createStatement();
+
+            Statement sqlStmt = dataSource.getConnection().createStatement();
 
             ResultSet result = sqlStmt.executeQuery("select * from books");
             while (result.next()) {
