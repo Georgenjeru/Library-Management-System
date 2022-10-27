@@ -3,6 +3,7 @@ package com.library.test;
 import com.controllers.LoginController;
 import com.model.Admin;
 import com.model.User;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.inject.Inject;
 import javax.servlet.ServletConfig;
@@ -36,9 +37,6 @@ public class LoginAction extends HttpServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        PrintWriter wr = res.getWriter();
-
-
         String password = req.getParameter("password");
         String username = req.getParameter("username");
 
@@ -53,25 +51,12 @@ public class LoginAction extends HttpServlet {
             res.sendRedirect("./login.jsp");
             return;
         }
-
-        /*User user = this.login(username, password);
+        User user = loginController.login(username, DigestUtils.md5Hex(password));
         if (user == null || user.getId() == null) {
             servletCtx.setAttribute("loginError" , "Incorrect Password<br/>");
             res.sendRedirect("./login.jsp");
             return;
         }
-        User user = this.login(username, DigestUtils.md5Hex(password));
-        if (user == null || user.getId() == null) {
-            servletCtx.setAttribute("loginError" , "Incorrect Password<br/>");
-            res.sendRedirect("./login.jsp");
-            return;
-        }
-        User user = loginController.login(username, password);
-        if (user == null || user.getId() == null) {
-            servletCtx.setAttribute("loginError" , "Incorrect Password<br/>");
-            res.sendRedirect("./login.jsp");
-            return;
-        }*/
 
         HttpSession session = req.getSession(true);
         session.setAttribute("username", username);
