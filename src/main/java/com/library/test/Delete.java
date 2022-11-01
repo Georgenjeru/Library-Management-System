@@ -18,7 +18,6 @@ public class Delete extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         String userId = req.getParameter("id");
-        //int traineeId = Integer.parseInt(req.getParameter("id"));
 
         System.out.println("userId: " + userId);
 

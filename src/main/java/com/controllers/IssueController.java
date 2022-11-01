@@ -1,11 +1,14 @@
 package com.controllers;
 
 
+import com.model.Admin;
 import com.model.Issue;
 
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.sql.DataSource;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -14,10 +17,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@RequestScoped
+@Named("issueController")
+
 public class IssueController implements Serializable {
 
     @Resource(lookup = "java:jboss/datasources/library")
     DataSource dataSource;
+
+    private List<Issue> list;
     public void add(Issue issue) {
         if (issue == null || StringUtils.isBlank(issue.getBookId()) || StringUtils.isBlank(issue.getUserId()))
             return;
@@ -42,7 +51,7 @@ public class IssueController implements Serializable {
 
     }
 
-    public List<Issue> list(Issue filter) {
+    public List<Issue> getList() {
         List<Issue> issues = new ArrayList<Issue>();
 
         try {
@@ -62,5 +71,8 @@ public class IssueController implements Serializable {
         }
 
         return issues;
+    }
+    public void setList(List<Issue> list) {
+        this.list = list;
     }
 }

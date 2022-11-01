@@ -1,8 +1,7 @@
-package com.actions;
+package com.Book;
 
-import com.controllers.AdminController;
-import com.model.Admin;
-
+import com.controllers.BookController;
+import com.model.Book;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,13 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
-
-@WebServlet("/student")
-public class AdminAction extends HttpServlet {
+@WebServlet("/book")
+public class BookAction extends HttpServlet {
 
     @Inject
-    AdminController adminController;
+    BookController bookController;
+
     ServletContext servletCtx = null;
 
     public void init(ServletConfig config) throws ServletException {
@@ -35,38 +35,42 @@ public class AdminAction extends HttpServlet {
     @SuppressWarnings("unchecked")
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+        PrintWriter wr = res.getWriter();
 
-        Admin admin = new Admin();
+        Book book = new Book();
+
 
         try {
-            BeanUtils.populate(admin, req.getParameterMap());
+            BeanUtils.populate(book, req.getParameterMap());
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        if (StringUtils.isBlank(admin.getName())) {
-            servletCtx.setAttribute("addStudentError", "Name is required<br/>");
+        if (StringUtils.isBlank(book.getGenre())) {
+            servletCtx.setAttribute("addBookError", "Genre is required<br/>");
             res.sendRedirect("./admin_add.jsp");
             return;
         }
 
-        if (StringUtils.isBlank(admin.getEmail())) {
-            servletCtx.setAttribute("addStudentError", "Email is required<br/>");
+        if (StringUtils.isBlank(book.getTitle())) {
+            servletCtx.setAttribute("addBookError", "Title is required<br/>");
             res.sendRedirect("./admin_add.jsp");
             return;
         }
-        if (StringUtils.isBlank(admin.getId())) {
-            servletCtx.setAttribute("addStudentError", "Id No is required<br/>");
+        if (StringUtils.isBlank(book.getAuthor())) {
+            servletCtx.setAttribute("addBookError", "Author is required<br/>");
             res.sendRedirect("./admin_add.jsp");
             return;
         }
-        adminController.add(admin);
+
+        bookController.add(book);
 
         res.sendRedirect("./home.jsp");
 
 
     }
 }
+
 
 
 

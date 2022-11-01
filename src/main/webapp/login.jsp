@@ -4,7 +4,6 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="cht" uri="./WEB-INF/tlds/header.tld" %>
-<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
 
 
 
@@ -46,5 +45,3 @@
 
 
         <% } %>
-
-<cft:Footer>&copy; <a href="#">George lms</a>, All Right Reserved. </cft:Footer>

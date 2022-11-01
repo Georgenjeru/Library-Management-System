@@ -16,7 +16,6 @@
 
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
-<jsp:useBean id = "adminController" class = "com.controllers.AdminController"/>
 
 
 <body>
@@ -37,19 +36,13 @@
                                 <th>Options</th>
 
                          </tr>
-
-                  <%
-                     List<Admin> admins = adminController.list(new Admin());
-                        pageContext.setAttribute("admins", admins);
-
-                  %>
-                     <jc:forEach items="${admins}" var="admin">
+                     <jc:forEach items="${adminController.list}" var="admin">
                             <tr>
                                    <td> ${fn:trim(admin.email)} </td>
                                    <td> ${admin.id} </td>
                                    <td> ${fn:toLowerCase(admin.name)}  </td>
                                    <td><a href="./edit?genre=${book.genre}">Edit</a></td>
-                                    <td><a href="./delete?adminId=${admin.id}"}>Delete</a></td>
+                                    <td><a href="./deleteAdmin?Id=${admin.id}"}>Delete</a></td>
 
                              </tr>
                      </jc:forEach>
@@ -89,6 +82,6 @@
 
                 <% } %>
 
-                Home? <a href='./home.jsp'>Home</a><br/>
+                Home? <a href='./dashboard.jsp'>Home</a><br/>
                 </body>
                 </html>

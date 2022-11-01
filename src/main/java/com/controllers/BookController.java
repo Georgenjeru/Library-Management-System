@@ -5,18 +5,25 @@ import com.model.Book;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.sql.DataSource;
 import java.io.Serializable;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@RequestScoped
+@Named("bookController")
 public class BookController implements Serializable {
 
     @Resource(lookup = "java:jboss/datasources/library")
     DataSource dataSource;
+
+    private List<Book> list;
     public void add(Book book) {
         if (book == null || StringUtils.isBlank(book.getTitle()) || StringUtils.isBlank(book.getAuthor()))
             return;
@@ -34,7 +41,16 @@ public class BookController implements Serializable {
 
     }
 
+    @Inject
     public void delete(Book book) {
+        try{
+
+            Statement sqlStmt = dataSource.getConnection().createStatement();
+            System.out.println("delete from  books  where Title='" + book.getTitle() + "'");
+            sqlStmt.executeUpdate("delete from  books  where Title='" + book.getTitle() + "'");
+        }
+        catch(Exception ex1)
+        {ex1.printStackTrace();}
 
     }
 
@@ -43,7 +59,8 @@ public class BookController implements Serializable {
 
     }
 
-    public List<Book> list(Book filter) {
+
+    public List<Book> getList() {
         List<Book> books = new ArrayList<Book>();
 
         try {
@@ -63,7 +80,10 @@ public class BookController implements Serializable {
             System.out.println(ex.getMessage());
 
         }
-
         return books;
+    }
+
+    public void setList(List<Book> list) {
+        this.list = list;
     }
 }

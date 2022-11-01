@@ -3,10 +3,16 @@ package com.controllers;
 import com.model.User;
 
 import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
+
+@RequestScoped
+@Named("loginController")
 
 public class LoginController {
 

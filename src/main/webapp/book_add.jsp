@@ -29,17 +29,13 @@
                                     <th>Book Author</th>
                                     <th>Options</th>
                                  </tr>
-                                  <%
-                                     List<Book> books = bookController.list(new Book());
-                                       pageContext.setAttribute("books", books);
-
-                                  %>
-                                   <jc:forEach items="${books}" var="book">
+                                   <jc:forEach items="${bookController.list}" var="book">
                                       <tr>
                                         <td> ${fn:length(book.genre)} </td>
                                         <td> ${book.title} </td>
                                         <td> ${fn:toUpperCase(book.author)} </td>
-                                        <td><a href="./edit?genre=${book.genre}">Edit</a>  | <a href="./delete">Delete</a></td>
+                                        <td><a href="./edit?genre=${book.genre}">Edit</a></td>
+                                        <td><a href="./deleteBook?Title=${book.title}"}>Delete</a></td>
                                       </tr>
                                    </jc:forEach>
                               </table>
@@ -75,6 +71,6 @@
 
                 <% } %>
 
-                Home? <a href='./home.jsp'>Home</a><br/>
+                Home? <a href='./dashboard.jsp'>Home</a><br/>
     </body>
 </html>
