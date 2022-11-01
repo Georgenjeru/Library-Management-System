@@ -62,7 +62,7 @@ public class LoginAction extends HttpServlet {
         session.setAttribute("username", username);
         session.setAttribute("loggedInTime", "Logged In Time:" + new Date());
 
-        res.sendRedirect("./home.jsp");
+        res.sendRedirect("./dashboard.jsp");
 
     }
 

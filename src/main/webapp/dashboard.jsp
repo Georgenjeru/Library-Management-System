@@ -10,6 +10,8 @@
 
 
 <body>
+<h3> Welcome: ${sessionScope.username} Logged In At: ${sessionScope.loggedInTime}</h3>
+<span style= "color:green;font-size: 24px;font-weight:bold">Logged In</span>
          <div class="sidebar pe-4 pb-3">
                     <nav class="navbar bg-secondary navbar-dark">
                         <a href="index.html" class="navbar-brand mx-4 mb-3">
@@ -26,16 +28,17 @@
                             </div>
                         </div>
                         <div class="navbar-nav w-100">
-                            <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                            <a href="dashboard.jsp" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Users</a>
+                                <a href="admin_add.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Users</a>
                                 <div class="dropdown-menu bg-transparent border-0">
                                     <a href="button.html" class="dropdown-item">Buttons</a>
                                     <a href="typography.html" class="dropdown-item">Typography</a>
                                     <a href="element.html" class="dropdown-item">Other Elements</a>
                                 </div>
                             </div>
-                            <a href="book_add.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Add Books</a>
+                            <a href="book_add.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Books</a>
+                            <a href="issue.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Issues</a>
                             <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
                             <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
                             <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
@@ -141,5 +144,128 @@
                              </div>
                          </div>
                      </nav>
+
+         <div class="container-fluid pt-4 px-4">
+                         <div class="row g-4">
+                             <div class="col-sm-12 col-md-6 col-xl-4">
+                                 <div class="h-100 bg-secondary rounded p-4">
+                                     <div class="d-flex align-items-center justify-content-between mb-2">
+                                         <h6 class="mb-0">Messages</h6>
+                                         <a href="">Show All</a>
+                                     </div>
+                                     <div class="d-flex align-items-center border-bottom py-3">
+                                         <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                         <div class="w-100 ms-3">
+                                             <div class="d-flex w-100 justify-content-between">
+                                                 <h6 class="mb-0">Jhon Doe</h6>
+                                                 <small>15 minutes ago</small>
+                                             </div>
+                                             <span>Short message goes here...</span>
+                                         </div>
+                                     </div>
+                                     <div class="d-flex align-items-center border-bottom py-3">
+                                         <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                         <div class="w-100 ms-3">
+                                             <div class="d-flex w-100 justify-content-between">
+                                                 <h6 class="mb-0">Jhon Doe</h6>
+                                                 <small>15 minutes ago</small>
+                                             </div>
+                                             <span>Short message goes here...</span>
+                                         </div>
+                                     </div>
+                                     <div class="d-flex align-items-center border-bottom py-3">
+                                         <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                         <div class="w-100 ms-3">
+                                             <div class="d-flex w-100 justify-content-between">
+                                                 <h6 class="mb-0">Jhon Doe</h6>
+                                                 <small>15 minutes ago</small>
+                                             </div>
+                                             <span>Short message goes here...</span>
+                                         </div>
+                                     </div>
+                                     <div class="d-flex align-items-center pt-3">
+                                         <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                         <div class="w-100 ms-3">
+                                             <div class="d-flex w-100 justify-content-between">
+                                                 <h6 class="mb-0">Jhon Doe</h6>
+                                                 <small>15 minutes ago</small>
+                                             </div>
+                                             <span>Short message goes here...</span>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-sm-12 col-md-6 col-xl-4">
+                                 <div class="h-100 bg-secondary rounded p-4">
+                                     <div class="d-flex align-items-center justify-content-between mb-4">
+                                         <h6 class="mb-0">Calender</h6>
+                                         <a href="">Show All</a>
+                                     </div>
+                                     <div id="calender"></div>
+                                 </div>
+                             </div>
+                             <div class="col-sm-12 col-md-6 col-xl-4">
+                                 <div class="h-100 bg-secondary rounded p-4">
+                                     <div class="d-flex align-items-center justify-content-between mb-4">
+                                         <h6 class="mb-0">To Do List</h6>
+                                         <a href="">Show All</a>
+                                     </div>
+                                     <div class="d-flex mb-2">
+                                         <input class="form-control bg-dark border-0" type="text" placeholder="Enter task">
+                                         <button type="button" class="btn btn-primary ms-2">Add</button>
+                                     </div>
+                                     <div class="d-flex align-items-center border-bottom py-2">
+                                         <input class="form-check-input m-0" type="checkbox">
+                                         <div class="w-100 ms-3">
+                                             <div class="d-flex w-100 align-items-center justify-content-between">
+                                                 <span>Short task goes here...</span>
+                                                 <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="d-flex align-items-center border-bottom py-2">
+                                         <input class="form-check-input m-0" type="checkbox">
+                                         <div class="w-100 ms-3">
+                                             <div class="d-flex w-100 align-items-center justify-content-between">
+                                                 <span>Short task goes here...</span>
+                                                 <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="d-flex align-items-center border-bottom py-2">
+                                         <input class="form-check-input m-0" type="checkbox" checked>
+                                         <div class="w-100 ms-3">
+                                             <div class="d-flex w-100 align-items-center justify-content-between">
+                                                 <span><del>Short task goes here...</del></span>
+                                                 <button class="btn btn-sm text-primary"><i class="fa fa-times"></i></button>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="d-flex align-items-center border-bottom py-2">
+                                         <input class="form-check-input m-0" type="checkbox">
+                                         <div class="w-100 ms-3">
+                                             <div class="d-flex w-100 align-items-center justify-content-between">
+                                                 <span>Short task goes here...</span>
+                                                 <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="d-flex align-items-center pt-2">
+                                         <input class="form-check-input m-0" type="checkbox">
+                                         <div class="w-100 ms-3">
+                                             <div class="d-flex w-100 align-items-center justify-content-between">
+                                                 <span>Short task goes here...</span>
+                                                 <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+<br/>Logout <a href='./logout'>Logout</a><br/>
+ <cft:Footer>&copy; <a href="#">George lms</a>, All Right Reserved.  </cft:Footer>
+
+
 
 

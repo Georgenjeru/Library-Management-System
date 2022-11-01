@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <body>
-              <%@ page isELIgnored="false" %>
-              <jsp:include page = "header.jsp"/>
-               <h1> <h1><%= application.getAttribute("applicationLabel") %></h1></h1>
+<%@ taglib prefix="cht" uri="./WEB-INF/tlds/header.tld" %>
+<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
+
+<cht:Header applicationLabel="${applicationScope.applicationLabel}" ></cht:Header>
+             <h1> <h1><%= application.getAttribute("applicationLabel") %></h1></h1>
                <h2>Issue Details</h2>
                 <form action= "./issue" method= "post">
                   <div class="container-fluid pt-4 px-4">

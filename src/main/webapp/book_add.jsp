@@ -1,8 +1,53 @@
-<!DOCTYPE html>
-<html>
-    <body>
-              <%@ page isELIgnored="false" %>
-              <jsp:include page = "header.jsp"/>
+<%@ page import="com.controllers.BookController" %>
+<%@ page import="com.model.Book" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jc" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
+<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
+<%@ page isELIgnored="false" %>
+
+
+
+<cht:Header applicationLabel="${applicationScope.applicationLabel}" />
+
+<jsp:useBean id = "bookController" class = "com.controllers.BookController"/>
+
+<h1> BOOKS </h1>
+           <br/>Add Books <a href='./book_add.jsp'>Add Books</a><br/>
+               <div class="col-12">
+                    <div class="bg-secondary rounded h-100 p-4">
+                        <h6 class="mb-4">Bordered Table</h6>
+                           <div class="table table-bordered">
+                              <table class="table">
+                                 <tr>
+                                    <th>Book Genre</th>
+                                    <th>Book Title</th>
+                                    <th>Book Author</th>
+                                    <th>Options</th>
+                                 </tr>
+                                  <%
+                                     List<Book> books = bookController.list(new Book());
+                                       pageContext.setAttribute("books", books);
+
+                                  %>
+                                   <jc:forEach items="${books}" var="book">
+                                      <tr>
+                                        <td> ${fn:length(book.genre)} </td>
+                                        <td> ${book.title} </td>
+                                        <td> ${fn:toUpperCase(book.author)} </td>
+                                        <td><a href="./edit?genre=${book.genre}">Edit</a>  | <a href="./delete">Delete</a></td>
+                                      </tr>
+                                   </jc:forEach>
+                              </table>
+                           </div>
+                    </div>
+               </div>
+
+<cht:Header applicationLabel="${applicationScope.applicationLabel}" ></cht:Header>
                <h1> <h1><%= application.getAttribute("applicationLabel") %></h1></h1>
                <h2> Add Book</h2>
                 <form action= "./book" method= "post">

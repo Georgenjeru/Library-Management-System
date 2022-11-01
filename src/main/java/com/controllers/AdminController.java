@@ -4,6 +4,8 @@ import com.model.Admin;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Resource;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import javax.sql.DataSource;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -11,6 +13,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+@SessionScoped
+@Named(value = "adminController")
 
 public class AdminController implements Serializable {
 

@@ -1,8 +1,6 @@
 <%@ taglib prefix="cht" uri="./WEB-INF/tlds/header.tld" %>
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
 
-
-
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" ></cht:Header>
 
           <body bgcolor="violet" style= "margin: auto; width: 220px;">
