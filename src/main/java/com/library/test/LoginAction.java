@@ -5,7 +5,7 @@ import com.model.Admin;
 import com.model.User;
 import org.apache.commons.codec.digest.DigestUtils;
 
-import javax.inject.Inject;
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,14 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/login")
 public class LoginAction extends HttpServlet {
 
-    @Inject
+    @EJB
     LoginController loginController;
 
     ServletContext servletCtx = null;

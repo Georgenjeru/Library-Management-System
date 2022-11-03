@@ -26,7 +26,14 @@ public class DeleteBook extends HttpServlet {
 
         servletCtx = config.getServletContext();
 
+        this.setBookController(bookController);
+
     }
+    @Inject
+    private void setBookController(BookController bookController){
+        this.bookController = bookController;
+    }
+
     @SuppressWarnings("unchecked")
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 

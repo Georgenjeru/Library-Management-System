@@ -3,6 +3,8 @@ package com.controllers;
 import com.model.User;
 
 import javax.annotation.Resource;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.sql.DataSource;
@@ -11,9 +13,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 
-@RequestScoped
-@Named("loginController")
-
+@Stateless
+@Remote
 public class LoginController {
 
     @Resource(lookup = "java:jboss/datasources/library")

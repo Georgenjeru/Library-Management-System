@@ -13,6 +13,6 @@ public class Logout  extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         req.getSession().invalidate();
-        res.sendRedirect("./");
+        res.sendRedirect("./index.jsp");
     }
 }
