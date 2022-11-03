@@ -58,6 +58,14 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.30</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>6.1.5.Final</version>
+      <type>pom</type>
+    </dependency>
+
     <dependency>
       <groupId>javax.servlet.jsp</groupId>
       <artifactId>javax.servlet.jsp-api</artifactId>

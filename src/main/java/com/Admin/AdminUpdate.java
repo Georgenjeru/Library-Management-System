@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 
 
 @WebServlet("/updateAdmin")
@@ -65,15 +65,23 @@ public class AdminUpdate extends HttpServlet {
             resp.sendRedirect("./admin_add.jsp");
             return;
         }
-
-        admin.setId("Id");
+        /*admin.setId("Id");
         admin.setName("Name");
         admin.setEmail("email");
 
 
         adminController.update(admin);
 
-        resp.sendRedirect("./dashboard.jsp");
+        resp.sendRedirect("./dashboard.jsp");*/
+    }
+    @Inject
+    public void update(Admin admin){
+        AdminController adminController1 = adminController;
+        admin.setId("Id");
+        admin.setName("Name");
+        admin.setEmail("email");
+
+        adminController1.update(admin);
     }
 }
 

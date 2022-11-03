@@ -1,9 +1,18 @@
 package com.model;
 
-public class Admin {
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "users")
+public class Admin {
+    @Column(name = "Id")
     private String Id;
+    @Column(name = "Name")
     private String name;
+    @Column(name = "Email")
     private String email;
 
 

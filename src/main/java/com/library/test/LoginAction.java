@@ -1,8 +1,11 @@
 package com.library.test;
 
-import com.controllers.LoginController;
+import com.controllers.LoginBean;
+import com.controllers.LoginBeanI;
 import com.model.Admin;
 import com.model.User;
+import com.model.Validate;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.ejb.EJB;
@@ -22,48 +25,42 @@ import java.util.List;
 public class LoginAction extends HttpServlet {
 
     @EJB
-    LoginController loginController;
+    LoginBeanI loginBean;
 
     ServletContext servletCtx = null;
 
-    public void init(ServletConfig config) throws ServletException{
+    public void init(ServletConfig config) throws ServletException {
         super.init(config);
 
         servletCtx = config.getServletContext();
 
     }
+
     public static List<Admin> adminList;
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        Validate validate = new Validate();
+        try {
+            BeanUtils.populate(validate, req.getParameterMap());
 
-        String password = req.getParameter("password");
-        String username = req.getParameter("username");
-
-        if (username == null || username.equalsIgnoreCase("")) {
-            servletCtx.setAttribute("loginError" , "Username is required<br/>");
-            res.sendRedirect("./login.jsp");
-            return;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
 
-        if (password == null || password.equalsIgnoreCase("")) {
-            servletCtx.setAttribute("loginError" , "Password is required<br/>");
-            res.sendRedirect("./login.jsp");
-            return;
-        }
-        User user = loginController.login(username, DigestUtils.md5Hex(password));
-        if (user == null || user.getId() == null) {
-            servletCtx.setAttribute("loginError" , "Incorrect Password<br/>");
-            res.sendRedirect("./login.jsp");
-            return;
-        }
+        try {
+            User user = loginBean.login(validate);
+            HttpSession session = req.getSession(true);
+            session.setAttribute("username", user.getEmail());
+            session.setAttribute("profile", user.getProfile());
+            session.setAttribute("loggedInTime", " Logged In At: " + new Date());
 
-        HttpSession session = req.getSession(true);
-        session.setAttribute("username", username);
-        session.setAttribute("loggedInTime", "Logged In Time:" + new Date());
+            res.sendRedirect("./dashboard.jsp");
 
-        res.sendRedirect("./dashboard.jsp");
+        } catch (Exception ex) {
+            servletCtx.setAttribute("loginError", ex.getMessage());
+            res.sendRedirect("./login.jsp");
+        }
 
     }
-
 }
 

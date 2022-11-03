@@ -1,10 +1,20 @@
 package com.model;
 
-public class ContactUs {
-    private  String userEmail;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "contact_us")
+
+public class ContactUs {
+    @Column
+    private  String userEmail;
+    @Column
     private String contactMessage;
 
+    @Column
     private String userPhoneNo;
 
     public String getUserPhoneNo() {

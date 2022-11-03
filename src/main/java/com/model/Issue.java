@@ -1,8 +1,18 @@
 package com.model;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "issues")
 public class Issue {
+    @Column(name = "bookId")
     String BookId;
+    @Column(name = "userId")
     String UserId;
+    @Column(name = "period")
     String Period;
 
     public String getBookId() {
