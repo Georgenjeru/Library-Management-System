@@ -2,9 +2,11 @@ package com.library.test;
 
 
 
-import org.apache.commons.codec.digest.DigestUtils;
-import java.sql.Connection;
+import com.controllers.RegisterUserBeanI;
+import com.model.User;
+import org.apache.commons.beanutils.BeanUtils;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -13,15 +15,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Statement;
 
 
 @WebServlet("/register")
 public class RegisterAction extends HttpServlet {
 
+    @EJB
+    RegisterUserBeanI registerUserBean;
+
     ServletContext servletCtx = null;
-    public void init(ServletConfig config) throws ServletException{
+
+    public void init(ServletConfig config) throws ServletException {
         super.init(config);
 
         servletCtx = config.getServletContext();
@@ -29,13 +33,34 @@ public class RegisterAction extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        PrintWriter wr = res.getWriter();
-        String firstName = req.getParameter("firstName");
+
+        User user = new User();
+
+        try {
+            BeanUtils.populate(user, req.getParameterMap());
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        try {
+            registerUserBean.register(user);
+            res.sendRedirect("./login.jsp");
+
+        } catch (Exception ex) {
+            servletCtx.setAttribute("registerError", ex.getMessage());
+            res.sendRedirect("./register.jsp");
+        }
+
+    }
+}
+
+
+        /*String firstName = req.getParameter("firstName");
         String secondName = req.getParameter("secondName");
         String userName = req.getParameter("userName");
         String email = req.getParameter("email");
         String gender = req.getParameter("gender");
-        String contactusMessage = req.getParameter("contactusMessage");
         String password = req.getParameter("password");
         String confirmPassword = req.getParameter("confirmPassword");
 
@@ -55,8 +80,8 @@ public class RegisterAction extends HttpServlet {
             if (password == null || password.equalsIgnoreCase(""))
                 actionError += "Password is required<br/>";
 
-            /*if (confirmPassword == null || confirmPassword.equalsIgnoreCase(""))
-                actionError += "Confirm password is required<br/>";*/
+            if (confirmPassword == null || confirmPassword.equalsIgnoreCase(""))
+                actionError += "Confirm password is required<br/>";
 
             if (password != null && confirmPassword != null && !password.equals(confirmPassword))
                 actionError += "Password & confirm password do not match<br/>";
@@ -82,4 +107,4 @@ public class RegisterAction extends HttpServlet {
 
         }
     }
-}
+*/

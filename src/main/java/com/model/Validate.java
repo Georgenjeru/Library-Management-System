@@ -1,10 +1,11 @@
 package com.model;
 
-import jakarta.persistence.*;
+
+import javax.persistence.*;
 
 @Entity
-@Table(name = "validate")
-public class Validate {
+@Table(name = "validates")
+public class Validate extends BaseEntity {
 
     @Column
     private String username;
@@ -16,7 +17,6 @@ public class Validate {
     private String confirmPassword;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-
     private User user;
 
     public String getUsername() {

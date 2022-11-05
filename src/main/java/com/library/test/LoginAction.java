@@ -1,12 +1,12 @@
 package com.library.test;
 
-import com.controllers.LoginBean;
+
 import com.controllers.LoginBeanI;
 import com.model.Admin;
 import com.model.User;
 import com.model.Validate;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.codec.digest.DigestUtils;
+
 
 import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
@@ -51,7 +51,6 @@ public class LoginAction extends HttpServlet {
             User user = loginBean.login(validate);
             HttpSession session = req.getSession(true);
             session.setAttribute("username", user.getEmail());
-            session.setAttribute("profile", user.getProfile());
             session.setAttribute("loggedInTime", " Logged In At: " + new Date());
 
             res.sendRedirect("./dashboard.jsp");

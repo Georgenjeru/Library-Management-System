@@ -1,11 +1,11 @@
 package com.Book;
 
-import com.controllers.BookController;
+import com.controllers.BookBeanI;
 import com.model.Book;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.inject.Inject;
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,8 +19,8 @@ import java.io.PrintWriter;
 @WebServlet("/book")
 public class BookAction extends HttpServlet {
 
-    @Inject
-    BookController bookController;
+    @EJB
+    BookBeanI bookBean;
 
     ServletContext servletCtx = null;
 
@@ -64,14 +64,13 @@ public class BookAction extends HttpServlet {
             return;
         }
 
-        bookController.add(book);
+        bookBean.add(book);
 
-        res.sendRedirect("./home.jsp");
+        res.sendRedirect("./dashboard.jsp");
 
 
     }
 }
-
 
 
 

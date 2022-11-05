@@ -1,56 +1,47 @@
 package com.model;
 
 
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "validates")
-public class User{
+@Table(name = "users")
+public class User extends BaseEntity{
     @Column
-    private String username;
+    private String firstName;
+
+    @Column
+    private String lastName;
 
     @Column
     private String password;
 
-    @Column(name = "confirm_password")
-    private String confirmPassword;
     @Column
-    private String profile;
+    private String confirmPassword;
+
     @Column
     private String email;
 
-    @Column
-    private  Long Id;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-
     private List<Validate> validates = new ArrayList<Validate>();
 
-    public Long getId() {
-        return Id;
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setId(Long id) {
-        Id = id;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getProfile() {
-        return profile;
-    }
-
-    public void setProfile(String profile) {
-        this.profile = profile;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {

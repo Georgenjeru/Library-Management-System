@@ -1,6 +1,5 @@
 <%@ taglib prefix="cht" uri="./WEB-INF/tlds/header.tld" %>
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
-<%@ page import="com.controllers.IssueController" %>
 <%@ page import="com.model.Issue" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>

@@ -1,12 +1,13 @@
 package com.Admin;
 
-import com.controllers.AdminController;
+import com.controllers.AdminBean;
+import com.controllers.AdminBeanI;
 import com.model.Admin;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.inject.Inject;
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,8 +21,8 @@ import java.io.IOException;
 @WebServlet("/student")
 public class AdminAction extends HttpServlet {
 
-    @Inject
-    AdminController adminController;
+    @EJB
+    AdminBeanI adminBean;
     ServletContext servletCtx = null;
 
     public void init(ServletConfig config) throws ServletException {
@@ -30,10 +31,7 @@ public class AdminAction extends HttpServlet {
         servletCtx = config.getServletContext();
 
     }
-    @Inject
-    public AdminAction(AdminController adminController) {
-        this.adminController = adminController;
-    }
+
 
 
     @SuppressWarnings("unchecked")
@@ -59,14 +57,14 @@ public class AdminAction extends HttpServlet {
             res.sendRedirect("./admin_add.jsp");
             return;
         }
-        if (StringUtils.isBlank(admin.getId())) {
-            servletCtx.setAttribute("addStudentError", "Id No is required<br/>");
+        if (StringUtils.isBlank(admin.getRegNo())){
+            servletCtx.setAttribute("addStudentError", "Reg No is required<br/>");
             res.sendRedirect("./admin_add.jsp");
             return;
         }
-        adminController.add(admin);
+        adminBean.add(admin);
 
-        res.sendRedirect("./home.jsp");
+        res.sendRedirect("./dashboard.jsp");
 
 
     }

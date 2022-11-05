@@ -1,7 +1,5 @@
 <!----------------
-<%@ page import="com.controllers.AdminController" %>
-<%@ page import="com.controllers.BookController" %>
-<%@ page import="com.controllers.IssueController" %>
+
 <%@ page import="com.model.Admin" %>
 <%@ page import="com.model.Book" %>
 <%@ page import="com.model.Issue" %>
@@ -18,9 +16,6 @@
 
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
-<jsp:useBean id = "adminController" class = "com.controllers.AdminController"/>
-<jsp:useBean id = "bookController" class = "com.controllers.BookController"/>
-<jsp:useBean id = "issueController" class = "com.controllers.IssueController"/>
 
 
 <%@ page isELIgnored="false" %>

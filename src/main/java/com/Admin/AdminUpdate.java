@@ -1,11 +1,12 @@
 package com.Admin;
 
 
-import com.controllers.AdminController;
+import com.controllers.AdminBeanI;
 import com.model.Admin;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
-import javax.inject.Inject;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,8 +21,8 @@ import java.io.IOException;
 
 @WebServlet("/updateAdmin")
 public class AdminUpdate extends HttpServlet {
-    @Inject
-    AdminController adminController;
+    @EJB
+    AdminBeanI adminBean;
     ServletContext servletCtx = null;
 
     public void init(ServletConfig config) throws ServletException {
@@ -49,7 +50,7 @@ public class AdminUpdate extends HttpServlet {
         }
 
 
-        if (StringUtils.isBlank(admin.getId())) {
+        if (StringUtils.isBlank(admin.getId().toString())) {
             servletCtx.setAttribute("addError","Id is required");
             resp.sendRedirect("./admin_add.jsp");
             return;
@@ -65,23 +66,14 @@ public class AdminUpdate extends HttpServlet {
             resp.sendRedirect("./admin_add.jsp");
             return;
         }
-        /*admin.setId("Id");
+        admin.setRegNo("Id");
         admin.setName("Name");
         admin.setEmail("email");
 
 
-        adminController.update(admin);
+        adminBean.update(admin);
 
-        resp.sendRedirect("./dashboard.jsp");*/
-    }
-    @Inject
-    public void update(Admin admin){
-        AdminController adminController1 = adminController;
-        admin.setId("Id");
-        admin.setName("Name");
-        admin.setEmail("email");
-
-        adminController1.update(admin);
+        resp.sendRedirect("./dashboard.jsp");
     }
 }
 

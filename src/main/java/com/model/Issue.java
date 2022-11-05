@@ -1,13 +1,10 @@
 package com.model;
 
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "issues")
-public class Issue {
+public class Issue extends BaseEntity{
     @Column(name = "bookId")
     String BookId;
     @Column(name = "userId")

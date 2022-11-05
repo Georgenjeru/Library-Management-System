@@ -1,8 +1,9 @@
 package com.Admin;
 
-import com.controllers.AdminController;
+import com.controllers.AdminBeanI;
 import com.model.Admin;
-import javax.inject.Inject;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,8 +16,8 @@ import java.io.IOException;
 
 @WebServlet("/deleteAdmin")
 public class DeleteAdmin extends HttpServlet {
-    @Inject
-    AdminController adminController;
+    @EJB
+    AdminBeanI adminBean;
 
     static ServletContext servletCtx = null;
 
@@ -30,11 +31,11 @@ public class DeleteAdmin extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         Admin admin = new Admin();
-        admin.setId(req.getParameter("Id"));
+        admin.setId(Long.valueOf(req.getParameter("Id")));
 
 
 
-        adminController.delete(admin);
+        adminBean.delete(admin);
         res.sendRedirect("./admin_add.jsp");
     }
 

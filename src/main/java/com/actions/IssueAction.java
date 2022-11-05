@@ -1,13 +1,12 @@
 package com.actions;
 
-
-import com.controllers.IssueController;
+import com.controllers.IssueBeanI;
 import com.model.Issue;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.inject.Inject;
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,13 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 
 @WebServlet("/issue")
 public class IssueAction extends HttpServlet {
 
-    @Inject
-    IssueController issueController;
+    @EJB
+    IssueBeanI issueBean;
     ServletContext servletCtx = null;
 
     public void init(ServletConfig config) throws ServletException {
@@ -37,10 +35,7 @@ public class IssueAction extends HttpServlet {
     @SuppressWarnings("unchecked")
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        PrintWriter wr = res.getWriter();
         Issue issue = new Issue();
-
-
 
         try {
             BeanUtils.populate(issue, req.getParameterMap());
@@ -65,9 +60,9 @@ public class IssueAction extends HttpServlet {
             return;
         }
 
-        issueController.add(issue);
+        issueBean.add(issue);
 
-        res.sendRedirect("./home.jsp");
+        res.sendRedirect("./dashboard.jsp");
 
 
     }

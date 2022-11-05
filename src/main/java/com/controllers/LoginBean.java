@@ -2,15 +2,15 @@ package com.controllers;
 
 import com.model.User;
 import com.model.Validate;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 
 import javax.ejb.*;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
 @Stateless
-@Local
+@Remote
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class LoginBean implements LoginBeanI {
     @PersistenceContext
@@ -20,9 +20,9 @@ public class LoginBean implements LoginBeanI {
         if (validate.getUsername() == null || validate.getPassword() == null)
             throw new Exception("Incorrect password or username");
 
-        List<Validate> validates = entityManager.createQuery("FROM validates a WHERE a.username=:userName " +
-                        "and a.password=:pwd", Validate.class)
-                .setParameter("userName", validate.getUsername())
+        List<Validate> validates = entityManager.createQuery("FROM Validate a WHERE a.username=:username " +
+                        "and a.password=:password", Validate.class)
+                .setParameter("username", validate.getUsername())
                 .setParameter("password", validate.getPassword())
                 .getResultList();
 

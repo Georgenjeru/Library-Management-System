@@ -1,4 +1,3 @@
-<%@ page import="com.controllers.BookController" %>
 <%@ page import="com.model.Book" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
@@ -14,7 +13,6 @@
 
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
-<jsp:useBean id = "bookController" class = "com.controllers.BookController"/>
 
 <h1> BOOKS </h1>
            <br/>Add Books <a href='./book_add.jsp'>Add Books</a><br/>

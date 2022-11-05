@@ -1,14 +1,12 @@
 package com.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "contact_us")
 
-public class ContactUs {
+public class ContactUs extends BaseEntity {
     @Column
     private  String userEmail;
     @Column

@@ -1,4 +1,4 @@
-<%@ page import="com.controllers.AdminController" %>
+<%@ page import="com.controllers.AdminBean" %>
 <%@ page import="com.model.Admin" %>
 <%@ page import="com.model.Book" %>
 <%@ page import="com.model.Issue" %>
@@ -16,8 +16,6 @@
 
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
-
-
 <body>
 <h3> Welcome: ${sessionScope.username} Logged In At: ${sessionScope.loggedInTime}</h3>
 <span style= "color:green;font-size: 24px;font-weight:bold">Logged In</span>
@@ -31,15 +29,15 @@
                 <table class="table table-dark">
                          <tr>
                                 <th>User Email</th>
-                                <th>User Identification Number</th>
+                                <th>User Registration Number</th>
                                 <th>User Name</th>
                                 <th>Options</th>
 
                          </tr>
-                     <jc:forEach items="${adminController.list}" var="admin">
+                     <jc:forEach items="${adminBean.list}" var="admin">
                             <tr>
                                    <td> ${fn:trim(admin.email)} </td>
-                                   <td> ${admin.id} </td>
+                                   <td> ${admin.regNo} </td>
                                    <td> ${fn:toLowerCase(admin.name)}  </td>
                                    <td><a href="./edit?genre=${book.genre}">Edit</a></td>
                                     <td><a href="./deleteAdmin?Id=${admin.id}"}>Delete</a></td>
@@ -61,9 +59,8 @@
                                           <div class="bg-secondary rounded h-100 p-4">
                                               <h6 class="mb-4">User Table</h6>
                                             <table class="table">
-
                                                <tr> <td> User Email: </td> <td> <input type= "text" name="email"> </td> </tr>
-                                               <tr> <td> User ID: </td> <td> <input type= "text" name= "id"> </td> </tr>
+                                               <tr> <td> User Registration No: </td> <td> <input type= "text" name= "regNo"> </td> </tr>
                                                <tr> <td> User Name: </td> <td> <input type= "text" name= "name"> </td> </tr>
                                                <tr> <td> <input type= "submit" value= "Submit"></tr>
                                             </table>
@@ -85,3 +82,4 @@
                 Home? <a href='./dashboard.jsp'>Home</a><br/>
                 </body>
                 </html>
+

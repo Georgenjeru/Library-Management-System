@@ -1,9 +1,9 @@
 package com.Book;
 
-import com.controllers.BookController;
+import com.controllers.BookBeanI;
 import com.model.Book;
 
-import javax.inject.Inject;
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,8 +16,8 @@ import java.io.IOException;
 
 @WebServlet("/deleteBook")
 public class DeleteBook extends HttpServlet {
-    @Inject
-    BookController bookController;
+    @EJB
+    BookBeanI bookBean;
 
     static ServletContext servletCtx = null;
 
@@ -26,12 +26,6 @@ public class DeleteBook extends HttpServlet {
 
         servletCtx = config.getServletContext();
 
-        this.setBookController(bookController);
-
-    }
-    @Inject
-    private void setBookController(BookController bookController){
-        this.bookController = bookController;
     }
 
     @SuppressWarnings("unchecked")
@@ -40,7 +34,7 @@ public class DeleteBook extends HttpServlet {
         Book book = new Book();
         book.setTitle(req.getParameter("Title"));
 
-        bookController.delete(book);
+        bookBean.delete(book);
         res.sendRedirect("./book_add.jsp");
     }
 

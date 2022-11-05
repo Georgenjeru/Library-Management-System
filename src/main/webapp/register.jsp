@@ -1,7 +1,7 @@
 <%@ taglib prefix="cht" uri="./WEB-INF/tlds/header.tld" %>
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
 
-<cht:Header applicationLabel="${applicationScope.applicationLabel}" ></cht:Header>
+<cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
           <body bgcolor="violet" style= "margin: auto; width: 220px;">
               <form action= "./register" method= "post">
@@ -11,28 +11,21 @@
                     <br>
                     <label> Firstname </label>
                     <br>
-                    <input type= "text" name= "firstname" placeholder= "First Name">
+                    <input type= "text" name= "firstName" placeholder= "First Name">
                     <br>
                     <label> Lastname: </label>
                     <br>
-                    <input type= "text" name= "lastname" placeholder= "Last Name">
-                    <br>
-                    <label> UserName: </label>
-                    <input type= "text" name= "username" placeholder= "Username">
+                    <input type= "text" name= "lastName" placeholder= "Last Name">
                     <br>
                     <label> Email:</label>
                     <br> <input type= "email" name= "email" placeholder = "Email"/> <br>
                     <label>
-                    <label> Gender :</label>
-                    </label><br>
-                    <input type= "checkbox" name= "female"/> Female <br>
-                    <input type= "checkbox" name= "male"/> Male <br>
-                    <br>
+
                     <label> Password:</label>
                     <br>
                     <input type= "password" name= "password"  placeholder ="Password"> <br>
                     <label> ConfirmPassword:</label>
-                    <input type= "password" name= "confirmPassword "  placeholder= "Confirm Password"> <br>
+                    <input type= "password" name= "confirmPassword"  placeholder= "Confirm Password"> <br>
                     <tr> <td> <input type="submit" value="Submit "></tr>
                  </table>
               </form>

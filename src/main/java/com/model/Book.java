@@ -1,12 +1,12 @@
 package com.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "books")
-public class Book {
+public class Book extends BaseEntity{
 
     @Column(name = "genre")
     private String genre;
