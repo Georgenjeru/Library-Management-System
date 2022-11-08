@@ -32,7 +32,7 @@ public class DeleteBook extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         Book book = new Book();
-        book.setTitle(req.getParameter("Title"));
+        book.setId(Long.valueOf(req.getParameter("Id")));
 
         bookBean.delete(book);
         res.sendRedirect("./book_add.jsp");

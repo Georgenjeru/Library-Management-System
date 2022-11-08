@@ -5,12 +5,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
 @Remote
+@Named("adminBean")
 public class AdminBean implements AdminBeanI {
 
     @PersistenceContext
@@ -27,16 +30,15 @@ public class AdminBean implements AdminBeanI {
 
 
     }
+    public List<Admin> list(Admin filter){
+        List<Admin> admin = new ArrayList<Admin>();
+
+
+        return admin;
+    }
     public void delete(Admin admin) {
-
-        /*try{
-
-            Statement sqlStmt = dataSource.getConnection().createStatement();
-            System.out.println("delete from  users  where Id='" + admin.getId() + "'");
-            sqlStmt.executeUpdate("delete from  users  where Id='" + admin.getId() + "'");
-        }
-        catch(Exception ex1)
-        {ex1.printStackTrace();*/
+        Admin admn = entityManager.find(Admin.class,admin.getId());
+        entityManager.remove(admn);
 
     }
     public void update(Admin admin) {
@@ -52,7 +54,11 @@ public class AdminBean implements AdminBeanI {
             throw new RuntimeException(e);
         }*/
     }
+    public Admin getAdmin() {
+        Admin admin = new Admin();
 
+        return admin;
+    }
 
     public List<Admin> getList() {
         return entityManager.createQuery("FROM Admin a", Admin.class).getResultList();

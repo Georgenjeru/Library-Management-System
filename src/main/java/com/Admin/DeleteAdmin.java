@@ -31,14 +31,13 @@ public class DeleteAdmin extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         Admin admin = new Admin();
-        admin.setId(Long.valueOf(req.getParameter("Id")));
+        admin.setId(Long.valueOf(req.getParameter("id")));
 
-
-
-        adminBean.delete(admin);
-        res.sendRedirect("./admin_add.jsp");
+        try {
+            adminBean.delete(admin);
+        }catch(Exception e){
+                throw new RuntimeException(e);
+        }
+            res.sendRedirect("./admin_add.jsp");
+        }
     }
-
-
-
-}
