@@ -1,6 +1,5 @@
 package com.controllers;
 
-import com.model.Admin;
 import com.model.Book;
 
 import java.util.List;
@@ -13,6 +12,8 @@ public interface BookBeanI {
     void delete(Book book);
 
     void update(Book book);
+
+    Book getBook(Long id);
 }
 
 
