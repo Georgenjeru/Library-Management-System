@@ -41,23 +41,26 @@ public class AdminBean implements AdminBeanI {
         entityManager.remove(admn);
 
     }
-    public void update(Admin admin) {
-        /*try {
-            Statement sqlStmt  = dataSource.getConnection().createStatement();
-            sqlStmt.executeUpdate("UPDATE members " + "SET" + "name  = '" + admin.getName() + "'," +
-                    "User Id = '" + admin.getId() + "'," +
-                    "name = '" + admin.getName() + "'" +
-                    "email = '" + admin.getEmail() + "'" +
-                    "WHERE " + "username=" + "'" + admin.getName() + "'");
+    public  void update(Admin admin) {
+        if (admin == null || StringUtils.isBlank(admin.getRegNo()))
+            return;
+        if (StringUtils.isBlank(admin.getName()))
+            return;
+        if (StringUtils.isBlank(admin.getEmail()))
+            return;
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }*/
+        if (admin.getId() != null)
+            System.out.println("Entity manager will update");
+
+
+        entityManager.merge(admin);
+
     }
-    public Admin getAdmin() {
-        Admin admin = new Admin();
 
-        return admin;
+    public Admin getAdmin(Long id) {
+
+        return entityManager.find(Admin.class, id );
+
     }
 
     public List<Admin> getList() {

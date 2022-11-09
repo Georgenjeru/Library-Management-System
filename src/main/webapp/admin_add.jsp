@@ -28,6 +28,7 @@
                 <h6 class="mb-4">Users Table</h6>
                 <table class="table table-dark">
                          <tr>
+                                <th>User Id</th>
                                 <th>User Email</th>
                                 <th>User Registration Number</th>
                                 <th>User Name</th>
@@ -36,11 +37,12 @@
                          </tr>
                      <jc:forEach items="${adminBean.list}" var="admin">
                             <tr>
+                                   <td> ${admin.id} </td>
                                    <td> ${fn:trim(admin.email)} </td>
                                    <td> ${admin.regNo} </td>
                                    <td> ${fn:toLowerCase(admin.name)}  </td>
-                                   <td><a href="./edit?genre=${book.genre}">Edit</a></td>
-                                    <td><a href="./deleteAdmin?Id=${admin.id}"}>Delete</a></td>
+                                   <td><a href="./updateAdmin.jsp?id=${admin.id}">Edit</a></td>
+                                    <td><a href="./deleteAdmin?id=${admin.id}"}>Delete</a></td>
 
                              </tr>
                      </jc:forEach>
@@ -59,6 +61,7 @@
                                           <div class="bg-secondary rounded h-100 p-4">
                                               <h6 class="mb-4">User Table</h6>
                                             <table class="table">
+                                               <tr> <td> User Id: </td> <td> <input type= "text" name="id"> </td> </tr>
                                                <tr> <td> User Email: </td> <td> <input type= "text" name="email"> </td> </tr>
                                                <tr> <td> User Registration No: </td> <td> <input type= "text" name= "regNo"> </td> </tr>
                                                <tr> <td> User Name: </td> <td> <input type= "text" name= "name"> </td> </tr>

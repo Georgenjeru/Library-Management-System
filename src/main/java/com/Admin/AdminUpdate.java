@@ -55,6 +55,11 @@ public class AdminUpdate extends HttpServlet {
             resp.sendRedirect("./admin_add.jsp");
             return;
         }
+        if (StringUtils.isBlank(admin.getRegNo())) {
+            servletCtx.setAttribute("addError","regNo is required");
+            resp.sendRedirect("./admin_add.jsp");
+            return;
+        }
 
         if (StringUtils.isBlank(admin.getName())) {
             servletCtx.setAttribute("addError","name is required");
@@ -66,14 +71,11 @@ public class AdminUpdate extends HttpServlet {
             resp.sendRedirect("./admin_add.jsp");
             return;
         }
-        admin.setRegNo("Id");
-        admin.setName("Name");
-        admin.setEmail("email");
 
+        //adminBean.update(admin);
+        adminBean.add(admin);
 
-        adminBean.update(admin);
-
-        resp.sendRedirect("./dashboard.jsp");
+        resp.sendRedirect("./admin_add.jsp");
     }
 }
 

@@ -33,7 +33,7 @@
                                         <td> ${book.title} </td>
                                         <td> ${fn:toUpperCase(book.author)} </td>
                                         <td><a href="./edit?genre=${book.genre}">Edit</a></td>
-                                        <td><a href="./deleteBook?Title=${book.title}"}>Delete</a></td>
+                                        <td><a href="./deleteBook?Id=${book.id}"}>Delete</a></td>
                                       </tr>
                                    </jc:forEach>
                               </table>

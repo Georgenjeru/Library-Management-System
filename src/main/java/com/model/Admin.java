@@ -50,4 +50,6 @@ public class Admin extends BaseEntity{
     public void setRegNo(String regNo) {
         this.regNo = regNo;
     }
+
+
 }

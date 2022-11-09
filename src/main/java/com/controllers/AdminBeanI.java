@@ -13,5 +13,7 @@ public interface AdminBeanI {
     void delete(Admin admin);
 
     void update(Admin admin);
+
+    Admin getAdmin(Long id);
 }
 
