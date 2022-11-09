@@ -43,7 +43,7 @@ public class IssueAction extends HttpServlet {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        if (StringUtils.isBlank(issue.getBookId())) {
+        if (StringUtils.isBlank(issue.getBookDetail().getBookId())) {
             servletCtx.setAttribute("addIssueError", "Book ID is required<br/>");
             res.sendRedirect("./issue.jsp");
             return;

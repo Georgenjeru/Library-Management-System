@@ -39,5 +39,4 @@ public class DeleteBook extends HttpServlet {
     }
 
 
-
 }

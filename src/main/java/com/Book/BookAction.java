@@ -53,7 +53,7 @@ public class BookAction extends HttpServlet {
             return;
         }
 
-        if (StringUtils.isBlank(book.getTitle())) {
+        if (StringUtils.isBlank(book.getBookDetail().getTitle())) {
             servletCtx.setAttribute("addBookError", "Title is required<br/>");
             res.sendRedirect("./admin_add.jsp");
             return;

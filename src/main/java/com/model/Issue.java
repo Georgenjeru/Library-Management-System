@@ -5,20 +5,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "issues")
 public class Issue extends BaseEntity{
-    @Column(name = "bookId")
-    String BookId;
+
     @Column(name = "userId")
-    String UserId;
+    private String UserId;
     @Column(name = "period")
-    String Period;
+    private String Period;
 
-    public String getBookId() {
-        return BookId;
-    }
+    @Embedded
+    private BookDetail bookDetail;
 
-    public void setBookId(String bookId) {
-        BookId = bookId;
-    }
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+
 
     public String getUserId() {
         return UserId;
@@ -34,5 +31,14 @@ public class Issue extends BaseEntity{
 
     public void setPeriod(String period) {
         Period = period;
+    }
+
+
+    public BookDetail getBookDetail() {
+        return bookDetail;
+    }
+
+    public void setBookDetail(BookDetail bookDetail) {
+        this.bookDetail = bookDetail;
     }
 }

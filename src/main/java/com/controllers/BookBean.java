@@ -24,7 +24,7 @@ public class BookBean implements BookBeanI {
 
 
     public void add(Book book) {
-        if (book == null || StringUtils.isBlank(book.getTitle()) || StringUtils.isBlank(book.getAuthor()))
+        if (book == null || StringUtils.isBlank(book.getBookDetail().getTitle()) || StringUtils.isBlank(book.getAuthor()))
             return;
         entityManager.merge(book);
 

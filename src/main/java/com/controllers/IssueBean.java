@@ -20,7 +20,7 @@ public class IssueBean implements IssueBeanI {
     EntityManager entityManager;
 
     public void add(Issue issue) {
-        if (issue == null || StringUtils.isBlank(issue.getBookId()) || StringUtils.isBlank(issue.getUserId()))
+        if (issue == null || StringUtils.isBlank(issue.getBookDetail().getBookId()) || StringUtils.isBlank(issue.getUserId()))
             return;
 
         entityManager.merge(issue);
