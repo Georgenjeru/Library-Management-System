@@ -1,9 +1,7 @@
 package com.restapi;
 
 
-import com.bean.BookBeanI;
 import com.bean.IssueBeanI;
-import com.model.Book;
 import com.model.Issue;
 import com.rest.BaseRestApi;
 import com.rest.ResponseWrapper;
@@ -13,7 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/book")
+@Path("/issue")
 public class IssueApi extends BaseRestApi {
 
     @EJB
