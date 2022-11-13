@@ -16,12 +16,14 @@ public interface AdminBeanI {
 
     Admin getAdmin(Long id);
 
-    List<Admin> executeQuery();
+    //List<Admin> executeQuery();
 
     //void executeQuery1();
 
     void limit();
 
     void orderBy();
+
+    List<Admin> list();
 }
 

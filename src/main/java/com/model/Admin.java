@@ -5,10 +5,15 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@NamedQueries({
+        @NamedQuery(name = Admin.FIND_ALL, query = "SELECT a FROM Admin a")})
 @Entity
 @Table(name = "admins")
 public class Admin extends BaseEntity {
+
+
+    public static final String FIND_ALL = "Admin.findAll";
+
     @Column(name = "regNo")
     private String regNo;
     @Column(name = "Name")

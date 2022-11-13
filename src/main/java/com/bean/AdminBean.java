@@ -89,7 +89,14 @@ public class AdminBean implements AdminBeanI {
     }
 
     public List<Admin> getList() {
+
         return entityManager.createQuery("FROM Admin a", Admin.class).getResultList();
+
+        //return  entityManager.createNamedQuery(Admin.FIND_ALL, Admin.class).getResultList();
+    }
+    public List<Admin> list() {
+        return  entityManager.createNamedQuery(Admin.FIND_ALL, Admin.class).getResultList();
+
     }
 
 }

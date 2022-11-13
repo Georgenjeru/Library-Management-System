@@ -45,7 +45,7 @@ public class AdminAction extends HttpServlet {
 
 
         Admin admin = new Admin();
-        adminBean.executeQuery();
+        //adminBean.executeQuery();
 
         try {
             BeanUtils.populate(admin, req.getParameterMap());
