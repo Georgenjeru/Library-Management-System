@@ -1,7 +1,7 @@
 package com.Admin;
 
 
-import com.controllers.AdminBeanI;
+import com.bean.AdminBeanI;
 import com.model.Admin;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;

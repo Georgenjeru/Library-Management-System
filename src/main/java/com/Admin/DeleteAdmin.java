@@ -1,6 +1,6 @@
 package com.Admin;
 
-import com.controllers.AdminBeanI;
+import com.bean.AdminBeanI;
 import com.model.Admin;
 
 import javax.ejb.EJB;

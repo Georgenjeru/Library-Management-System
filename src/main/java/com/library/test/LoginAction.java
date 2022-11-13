@@ -1,7 +1,7 @@
 package com.library.test;
 
 
-import com.controllers.LoginBeanI;
+import com.bean.LoginBeanI;
 import com.model.Admin;
 import com.model.User;
 import com.model.Validate;

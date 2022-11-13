@@ -1,6 +1,6 @@
-package com.actions;
+package com.issue;
 
-import com.controllers.IssueBeanI;
+import com.bean.IssueBeanI;
 import com.model.Issue;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet("/issue")
 public class IssueAction extends HttpServlet {

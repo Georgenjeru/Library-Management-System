@@ -1,4 +1,4 @@
-package com.controllers;
+package com.bean;
 
 import com.model.Admin;
 import com.model.Book;
@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +24,11 @@ public class BookBean implements BookBeanI {
 
 
     public void add(Book book) {
-        if (book == null || StringUtils.isBlank(book.getBookDetail().getTitle()) || StringUtils.isBlank(book.getAuthor()))
+        if (book == null || StringUtils.isBlank(book.getBookDetail().getBookId()) || StringUtils.isBlank(book.getBookDetail().getTitle()))
             return;
+        if (book.getAuthor() == null)
+            book.setAuthor("author");
+
         entityManager.merge(book);
 
 
@@ -64,11 +68,16 @@ public class BookBean implements BookBeanI {
         return entityManager.find(Book.class, id );
 
     }
-
+    /*public void groupBy() {
+        Query query = entityManager.createQuery("SELECT bookId FROM books b GROUP BY b.bookId DESC");
+        List<Object[]> list = query.getResultList();
+        for (Object[] object : list) {
+            System.out.println(object[0] + "     " + object[1]);
+        }
+    }*/
 
     public List<Book> getList() {
-        return entityManager.createQuery("FROM Book s", Book.class).getResultList();
-
+        return entityManager.createQuery("FROM Book b", Book.class).getResultList();
     }
 
 

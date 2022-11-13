@@ -1,6 +1,6 @@
 package com.Book;
 
-import com.controllers.BookBeanI;
+import com.bean.BookBeanI;
 import com.model.Book;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;

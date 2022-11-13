@@ -1,4 +1,4 @@
-<%@ page import="com.controllers.AdminBean" %>
+<%@ page import="com.bean.AdminBean" %>
 <%@ page import="com.model.Admin" %>
 <%@ page import="com.model.Book" %>
 <%@ page import="com.model.Issue" %>

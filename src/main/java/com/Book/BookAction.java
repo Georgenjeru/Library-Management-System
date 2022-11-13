@@ -1,7 +1,8 @@
 package com.Book;
 
-import com.controllers.BookBeanI;
+import com.bean.BookBeanI;
 import com.model.Book;
+import com.model.BookDetail;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,8 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-
 @WebServlet("/book")
 public class BookAction extends HttpServlet {
 
@@ -36,9 +35,9 @@ public class BookAction extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        PrintWriter wr = res.getWriter();
-
         Book book = new Book();
+
+        book.setBookDetail(new BookDetail());
 
 
         try {
@@ -49,18 +48,18 @@ public class BookAction extends HttpServlet {
         }
         if (StringUtils.isBlank(book.getGenre())) {
             servletCtx.setAttribute("addBookError", "Genre is required<br/>");
-            res.sendRedirect("./admin_add.jsp");
+            res.sendRedirect("./book_add.jsp");
             return;
         }
 
         if (StringUtils.isBlank(book.getBookDetail().getTitle())) {
             servletCtx.setAttribute("addBookError", "Title is required<br/>");
-            res.sendRedirect("./admin_add.jsp");
+            res.sendRedirect("./book_add.jsp");
             return;
         }
         if (StringUtils.isBlank(book.getAuthor())) {
             servletCtx.setAttribute("addBookError", "Author is required<br/>");
-            res.sendRedirect("./admin_add.jsp");
+            res.sendRedirect("./book_add.jsp");
             return;
         }
 

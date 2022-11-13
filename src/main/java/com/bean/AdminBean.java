@@ -1,13 +1,13 @@
-package com.controllers;
+package com.bean;
 
 import com.model.Admin;
+import com.model.Book;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +61,31 @@ public class AdminBean implements AdminBeanI {
 
         return entityManager.find(Admin.class, id );
 
+    }
+    public void orderBy(){
+        Query query = entityManager.createQuery("SELECT a FROM admins a ORDER BY a.id DESC");
+        List<Admin> resultList = query.getResultList();
+        resultList.forEach(System.out::println);
+    }
+    public void limit() {
+        Query query = entityManager.createQuery("SELECT m FROM books m ORDER BY m.id DESC ").setMaxResults(4);
+        List<Book> resultList = query.getResultList();
+        resultList.forEach(System.out::println);
+    }
+    public List<Admin> executeQuery() {
+        System.out.println("-- executing query --");
+        Query query = entityManager.createQuery("SELECT DISTINCT a FROM admins a INNER JOIN a.books b");
+        List<Admin> resultList = query.getResultList();
+        resultList.forEach(System.out::println);
+        return resultList;
+    }
+
+    public void executeQuery1() {
+        System.out.println("-- executing query 1 --");
+        Query query = entityManager.createQuery("SELECT DISTINCT a FROM admins a LEFT JOIN a.books b");
+        List<Admin> resultList = query.getResultList();
+        resultList.forEach(System.out::println);
+        entityManager.close();
     }
 
     public List<Admin> getList() {

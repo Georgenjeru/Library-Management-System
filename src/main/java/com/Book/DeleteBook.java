@@ -1,6 +1,6 @@
 package com.Book;
 
-import com.controllers.BookBeanI;
+import com.bean.BookBeanI;
 import com.model.Book;
 
 import javax.ejb.EJB;

@@ -1,4 +1,4 @@
-package com.controllers;
+package com.bean;
 
 
 import com.model.Admin;
@@ -15,5 +15,13 @@ public interface AdminBeanI {
     void update(Admin admin);
 
     Admin getAdmin(Long id);
+
+    List<Admin> executeQuery();
+
+    //void executeQuery1();
+
+    void limit();
+
+    void orderBy();
 }
 

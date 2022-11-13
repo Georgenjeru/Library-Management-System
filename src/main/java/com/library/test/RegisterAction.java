@@ -2,7 +2,7 @@ package com.library.test;
 
 
 
-import com.controllers.RegisterUserBeanI;
+import com.bean.RegisterUserBeanI;
 import com.model.User;
 import org.apache.commons.beanutils.BeanUtils;
 

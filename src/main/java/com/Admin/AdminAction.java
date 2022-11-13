@@ -1,13 +1,15 @@
 package com.Admin;
 
-import com.controllers.AdminBean;
-import com.controllers.AdminBeanI;
+import com.bean.AdminBeanI;
 import com.model.Admin;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,10 +18,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 @WebServlet("/student")
 public class AdminAction extends HttpServlet {
+
+    @PersistenceContext
+    EntityManager entityManager;
 
     @EJB
     AdminBeanI adminBean;
@@ -39,6 +45,7 @@ public class AdminAction extends HttpServlet {
 
 
         Admin admin = new Admin();
+        adminBean.executeQuery();
 
         try {
             BeanUtils.populate(admin, req.getParameterMap());

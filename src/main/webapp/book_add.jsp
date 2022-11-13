@@ -1,4 +1,5 @@
 <%@ page import="com.model.Book" %>
+<%@ page import="com.bean.BookBean" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
@@ -22,17 +23,21 @@
                            <div class="table table-bordered">
                               <table class="table">
                                  <tr>
+                                    <th> Id </th>
+                                    <th> Book Id </th>
                                     <th>Book Genre</th>
                                     <th>Book Title</th>
                                     <th>Book Author</th>
                                     <th>Options</th>
                                  </tr>
-                                   <jc:forEach items="${bookController.list}" var="book">
+                                   <jc:forEach items="${bookBean.list}" var="book">
                                       <tr>
+                                        <td> ${book.id} </td>
+                                        <td> ${book.bookDetail.bookId} </td>
                                         <td> ${fn:length(book.genre)} </td>
-                                        <td> ${book.title} </td>
+                                        <td> ${book.bookDetail.title} </td>
                                         <td> ${fn:toUpperCase(book.author)} </td>
-                                        <td><a href="./edit?genre=${book.genre}">Edit</a></td>
+                                        <td><a href="./updateBook.jsp?id=${book.id}">Edit</a></td>
                                         <td><a href="./deleteBook?Id=${book.id}"}>Delete</a></td>
                                       </tr>
                                    </jc:forEach>
@@ -51,8 +56,10 @@
                             <div class="bg-secondary rounded h-100 p-4">
                                   <h6 class="mb-4">Books Table</h6>
                              <table class="table">
+                                   <tr> <td> Id: </td> <td> <input type= "text" name="id"> </td> </tr>
+                                   <tr> <td> Book Id: </td> <td> <input type= "text" name="bookDetail.bookId"> </td> </tr>
                                    <tr> <td> Book Genre: </td> <td> <input type= "text" name="genre"> </td> </tr>
-                                   <tr> <td> Book Title: </td> <td> <input type= "text" name= "title"> </td> </tr>
+                                   <tr> <td> Book Title: </td> <td> <input type= "text" name= "bookDetail.title"> </td> </tr>
                                    <tr> <td> Book Author: </td> <td> <input type= "text" name= "author"> </td> </tr>
                                    <tr> <td> <input type= "submit" value= "Submit"></tr>
                              </table>

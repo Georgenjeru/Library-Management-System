@@ -1,9 +1,10 @@
 package com.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Embeddable
-public class BookDetail {
+public class BookDetail implements Serializable{
 
     @Column
     private String BookId;
