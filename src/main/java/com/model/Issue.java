@@ -14,7 +14,11 @@ public class Issue extends BaseEntity{
     @Embedded
     private BookDetail bookDetail;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Book book;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Admin admin;
 
 
     public String getUserId() {
@@ -39,6 +43,23 @@ public class Issue extends BaseEntity{
     }
 
     public void setBookDetail(BookDetail bookDetail) {
+
         this.bookDetail = bookDetail;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 }

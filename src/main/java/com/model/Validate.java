@@ -19,6 +19,8 @@ public class Validate extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private User user;
 
+
+
     public String getUsername() {
         return username;
     }

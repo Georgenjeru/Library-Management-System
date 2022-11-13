@@ -1,6 +1,8 @@
 package com.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -16,8 +18,8 @@ public class Book extends BaseEntity{
 
 
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Book book;
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private List<Issue> issues = new ArrayList<Issue>();
 
     public String getGenre() {
         return genre;
@@ -37,19 +39,19 @@ public class Book extends BaseEntity{
     }
 
 
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
     public BookDetail getBookDetail() {
         return bookDetail;
     }
 
     public void setBookDetail(BookDetail bookDetail) {
         this.bookDetail = bookDetail;
+    }
+
+    public List<Issue> getIssues() {
+        return issues;
+    }
+
+    public void setIssues(List<Issue> issues) {
+        this.issues = issues;
     }
 }

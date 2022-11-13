@@ -30,45 +30,47 @@ public class Admin extends BaseEntity {
         this.email = email;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Book> books = new ArrayList<Book>();
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
+    private List<Issue> issues = new ArrayList<Issue>();
     //@JoinColumn(name = "regNo", referencedColumnName = "regNo")
 
 
     public String getEmail() {
+
         return email;
     }
 
     public void setEmail(String email) {
+
         this.email = email;
     }
 
 
     public String getName() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 
     public String getRegNo() {
+
         return regNo;
     }
 
     public void setRegNo(String regNo) {
+
         this.regNo = regNo;
     }
 
-    public List<Book> getBooks() {
-        return books;
+    public List<Issue> getIssues() {
+        return issues;
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
+    public void setIssues(List<Issue> issues) {
+        this.issues = issues;
     }
-    /*public void addBook(Book book){
-        book.setId(this.getId());
-        getBooks().add(book);
-    }*/
 }
