@@ -22,16 +22,19 @@
                               <table class="table">
                                  <tr>
                                     <th>Book ID</th>
+                                    <th>Book Title</th>
                                     <th>User ID</th>
                                     <th>Period in Days</th>
                                     <th>Options</th>
                                  </tr>
                                    <jc:forEach items="${issueController.list}" var="issue">
                                       <tr>
-                                        <td> ${issue.bookId} </td>
+                                        <td> ${issue.bookDetail.bookId} </td>
+                                        <td> ${issue.bookDetail.title} </td>
                                         <td> ${issue.userId} </td>
                                         <td> ${fn:toUpperCase(issue.period)} </td>
-                                        <td><a href="./edit?genre=${book.genre}">Edit</a>  | <a href="./delete">Delete</a></td>
+                                        <td><a href="./updateIssue.jsp?id=${issue.id}">Edit</a></td>
+                                        <td><a href="./deleteIssue?id=${issue.id}"}>Delete</a></td>
                                       </tr>
                                    </jc:forEach>
                               </table>
@@ -51,8 +54,10 @@
                                   <h6 class="mb-4">Issue Table</h6>
                              <table class="table">
                                    <tr> <td> Book ID: </td> <td> <input type= "text" name="bookId"> </td> </tr>
+                                   <tr> <td> Book Title: </td> <td> <input type= "text" name="title"> </td> </tr>
                                    <tr> <td> User ID: </td> <td> <input type= "text" name= "userId"> </td> </tr>
                                    <tr> <td> Period in Days: </td> <td> <input type= "text" name= "period"> </td> </tr>
+
                                    <tr> <td> <input type= "submit" value= "Submit"></tr>
                              </table>
                             </div>

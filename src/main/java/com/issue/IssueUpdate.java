@@ -32,7 +32,7 @@ public class IssueUpdate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();;
-        resp.sendRedirect("./updateIssue.jsp");
+        resp.sendRedirect("./updateIssue.jsp.jsp");
     }
 
     @SuppressWarnings("unchecked")

@@ -1,6 +1,5 @@
 package com.bean;
 
-import com.model.Admin;
 import com.model.Book;
 import org.apache.commons.lang3.StringUtils;
 
@@ -9,7 +8,6 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
