@@ -17,7 +17,9 @@ public class Book extends BaseEntity{
     @Column(name = "author")
     private String Author;
 
-
+    @Column
+    @Enumerated(EnumType.STRING)
+    private BookStatus status;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<Issue> issues = new ArrayList<Issue>();

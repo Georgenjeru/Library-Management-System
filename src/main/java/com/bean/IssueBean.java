@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -72,5 +73,17 @@ public class IssueBean implements IssueBeanI {
         resultList.forEach(System.out::println);
         return resultList;
     }
+    /*public List<Admin> getPendingBooks(Admin admin) {
+
+        List<Admin> training = new ArrayList<>();
+        entityManager.createQuery("FROM Enrollment e WHERE  e.trainee.id=:traineeId AND e.training.status=:status", Enrollment.class)
+                .setParameter("traineeId", trainee.getId())
+                .setParameter("status", TrainingStatus.COMPLETED)
+                .getResultList()
+                .forEach((enrollment) -> training.add(enrollment.getTraining())
+                );
+
+        return training;
+    }*/
 
 }

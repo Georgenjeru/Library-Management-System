@@ -29,6 +29,7 @@
                                     <th>Book Title</th>
                                     <th>Book Author</th>
                                     <th>Options</th>
+                                    <th>Book Status</th>
                                  </tr>
                                    <jc:forEach items="${BookView.list}" var="book">
                                       <tr>
@@ -37,8 +38,7 @@
                                         <td> ${fn:length(book.genre)} </td>
                                         <td> ${book.bookDetail.title} </td>
                                         <td> ${fn:toUpperCase(book.author)} </td>
-                                        <td><a href="./updateBook.jsp?id=${book.id}">Edit</a></td>
-                                        <td><a href="./deleteBook?Id=${book.id}"}>Delete</a></td>
+                                        <td><a href="./updateBook.jsp?id=${book.id}">Edit</a> | <a href="./deleteBook?Id=${book.id}"}>Delete</a></td>
                                       </tr>
                                    </jc:forEach>
                               </table>

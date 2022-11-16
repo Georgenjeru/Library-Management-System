@@ -3,7 +3,7 @@
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
 <%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
-<cht:Header></cht:Header>
+<cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
 <form action= "./contactus.jsp" method= "post">
                    <h3 > Contact Us</h3>
