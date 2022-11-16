@@ -24,6 +24,9 @@ public class User extends BaseEntity{
     @Column
     private String email;
 
+    @Transient
+    private String bearerToken;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Validate> validates = new ArrayList<Validate>();
 
@@ -78,5 +81,13 @@ public class User extends BaseEntity{
     public void addValidate(Validate validate){
         validate.setUser(this);
         getValidates().add(validate);
+    }
+
+    public String getBearerToken() {
+        return bearerToken;
+    }
+
+    public void setBearerToken(String bearerToken) {
+        this.bearerToken = bearerToken;
     }
 }
