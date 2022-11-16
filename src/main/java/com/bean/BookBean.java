@@ -75,6 +75,7 @@ public class BookBean implements BookBeanI {
     }*/
 
     public List<Book> getList() {
+
         return entityManager.createQuery("FROM Book b", Book.class).getResultList();
     }
 

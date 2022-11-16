@@ -11,10 +11,8 @@
 
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
-
-
 <h1> Issue </h1>
-           <br/>Issues <a href='./issue.jsp'>Add Issues</a><br/>
+           <br/>Issues <a href='./issue_add.jsp'>Add Issues</a><br/>
                <div class="col-12">
                     <div class="bg-secondary rounded h-100 p-4">
                         <h6 class="mb-4">Bordered Table</h6>
@@ -41,38 +39,4 @@
                            </div>
                     </div>
                </div>
-
-
-<cht:Header applicationLabel="${applicationScope.applicationLabel}" ></cht:Header>
-             <h1> <h1><%= application.getAttribute("applicationLabel") %></h1></h1>
-               <h2>Issue Details</h2>
-                <form action= "./issue" method= "post">
-                  <div class="container-fluid pt-4 px-4">
-                      <div class="row g-4">
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-secondary rounded h-100 p-4">
-                                  <h6 class="mb-4">Issue Table</h6>
-                             <table class="table">
-                                   <tr> <td> Book ID: </td> <td> <input type= "text" name="bookId"> </td> </tr>
-                                   <tr> <td> Book Title: </td> <td> <input type= "text" name="title"> </td> </tr>
-                                   <tr> <td> User ID: </td> <td> <input type= "text" name= "userId"> </td> </tr>
-                                   <tr> <td> Period in Days: </td> <td> <input type= "text" name= "period"> </td> </tr>
-
-                                   <tr> <td> <input type= "submit" value= "Submit"></tr>
-                             </table>
-                            </div>
-                        </div>
-                      </div>
-                  </div>
-                </form>
-                <%
-                    String loginError = (String) application.getAttribute("addIssueError");
-                    if (loginError != null && !loginError.equals("")) {
-                %>
-                    <span style="color:red"> <%= application.getAttribute("addIssueError") %> </span><br/>
-
-                <% } %>
-
-                Home? <a href='./dashboard.jsp'>Home</a><br/>
-    </body>
-</html>
+<cft:Footer>&copy; <a href="#">George lms</a>, All Right Reserved. </cft:Footer>

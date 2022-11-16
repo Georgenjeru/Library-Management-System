@@ -7,8 +7,6 @@
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
 
-
-
 <body>
 <h3> Welcome: ${sessionScope.username} Logged In At: ${sessionScope.loggedInTime}</h3>
 <span style= "color:green;font-size: 24px;font-weight:bold">Logged In</span>

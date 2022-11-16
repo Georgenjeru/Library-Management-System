@@ -13,7 +13,6 @@
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
 
 
-
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
 

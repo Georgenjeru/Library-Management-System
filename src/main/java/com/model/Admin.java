@@ -1,6 +1,7 @@
 package com.model;
 
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +66,7 @@ public class Admin extends BaseEntity {
 
         this.regNo = regNo;
     }
-
+    @JsonbTransient
     public List<Issue> getIssues() {
         return issues;
     }

@@ -1,6 +1,7 @@
 package com.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "issues")
@@ -10,6 +11,12 @@ public class Issue extends BaseEntity{
     private String UserId;
     @Column(name = "period")
     private String Period;
+
+    @Column
+    Date StartDate;
+
+    @Column
+    Date EndDate;
 
     @Embedded
     private BookDetail bookDetail;
@@ -60,6 +67,23 @@ public class Issue extends BaseEntity{
     }
 
     public void setAdmin(Admin admin) {
+
         this.admin = admin;
+    }
+
+    public Date getStartDate() {
+        return StartDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        StartDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return EndDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        EndDate = endDate;
     }
 }

@@ -58,6 +58,16 @@ public class IssueAction extends HttpServlet {
             res.sendRedirect("./issue.jsp");
             return;
         }
+        if (StringUtils.isBlank((CharSequence) issue.getStartDate())) {
+            servletCtx.setAttribute("addIssueError", "Start Date required<br/>");
+            res.sendRedirect("./issue.jsp");
+            return;
+        }
+        if (StringUtils.isBlank((CharSequence) issue.getStartDate())) {
+            servletCtx.setAttribute("addIssueError", "End Date required<br/>");
+            res.sendRedirect("./issue.jsp");
+            return;
+        }
 
         issueBean.add(issue);
 

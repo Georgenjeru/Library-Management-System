@@ -1,5 +1,6 @@
 package com.model;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class Book extends BaseEntity{
     public void setBookDetail(BookDetail bookDetail) {
         this.bookDetail = bookDetail;
     }
-
+    @JsonbTransient
     public List<Issue> getIssues() {
         return issues;
     }

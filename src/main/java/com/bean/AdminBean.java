@@ -2,6 +2,7 @@ package com.bean;
 
 import com.model.Admin;
 import com.model.Book;
+import com.model.Issue;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.Remote;
@@ -72,21 +73,7 @@ public class AdminBean implements AdminBeanI {
         List<Book> resultList = query.getResultList();
         resultList.forEach(System.out::println);
     }
-    public List<Admin> executeQuery() {
-        System.out.println("-- executing query --");
-        Query query = entityManager.createQuery("SELECT DISTINCT a FROM admins a INNER JOIN a.books b");
-        List<Admin> resultList = query.getResultList();
-        resultList.forEach(System.out::println);
-        return resultList;
-    }
 
-    public void executeQuery1() {
-        System.out.println("-- executing query 1 --");
-        Query query = entityManager.createQuery("SELECT DISTINCT a FROM admins a LEFT JOIN a.books b");
-        List<Admin> resultList = query.getResultList();
-        resultList.forEach(System.out::println);
-        entityManager.close();
-    }
 
     public List<Admin> getList() {
 
@@ -98,5 +85,11 @@ public class AdminBean implements AdminBeanI {
         return  entityManager.createNamedQuery(Admin.FIND_ALL, Admin.class).getResultList();
 
     }
+    public List<Admin> requestBook() {
+        List<Admin> admins = entityManager.createQuery("", Admin.class)
+                .getResultList();
+        return admins;
+    }
+
 
 }
