@@ -65,7 +65,7 @@ public class BookUpdate extends HttpServlet {
             resp.sendRedirect("./book_add.jsp");
             return;
         }
-        if (StringUtils.isBlank(book.getBookDetail().getBookId())) {
+        if (StringUtils.isBlank(book.getBookId())) {
             servletCtx.setAttribute("addError", "Book Id is required");
             resp.sendRedirect("./book_add.jsp");
             return;

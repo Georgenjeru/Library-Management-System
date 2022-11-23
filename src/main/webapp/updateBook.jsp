@@ -36,6 +36,7 @@
                                                <tr> <td> Book Genre: </td> <td> <input type= "text" name= "genre" value="${book.genre}"/>  </td> </tr>
                                                <tr> <td> Book Title: </td> <td> <input type= "text" name= "title" value="${book.bookDetail.title}" /> </td> </tr>
                                                <tr> <td> Book Author: </td> <td> <input type= "text" name= "author" value="${book.author}" /> </td> </tr>
+                                               tr> <td> Book Status: </td> <td> <input type= "text" name= "status" value="${book.status}" /> </td> </tr>
                                                <tr> <td> <input type= "submit" value= "Submit"></tr>
                                             </table>
                                           </div>

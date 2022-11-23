@@ -21,7 +21,7 @@ public class IssueBean implements IssueBeanI {
     EntityManager entityManager;
 
     public void add(Issue issue) {
-        if (issue == null || StringUtils.isBlank(issue.getBookDetail().getBookId()) || StringUtils.isBlank(issue.getUserId()))
+        if (issue == null || StringUtils.isBlank(issue.getBookId()) || StringUtils.isBlank(issue.getUserId()))
             return;
 
         entityManager.merge(issue);
@@ -41,9 +41,9 @@ public class IssueBean implements IssueBeanI {
             return;
         if (StringUtils.isBlank(issue.getPeriod()))
             return;
-        if (StringUtils.isBlank(issue.getBookDetail().getBookId()))
+        if (StringUtils.isBlank(issue.getBookId()))
             return;
-        if (StringUtils.isBlank(issue.getBookDetail().getBookId()))
+        if (StringUtils.isBlank(issue.getBookId()))
         return;
         if (StringUtils.isBlank((CharSequence) issue.getStartDate()))
             return;
@@ -61,7 +61,7 @@ public class IssueBean implements IssueBeanI {
         return entityManager.createQuery("FROM Issue s", Issue.class).getResultList();
 
     }
-    public List<Admin> viewIssuedBooks() {
+    public List<Admin> getUsersWithBooks() {
         Query query = entityManager.createQuery("SELECT DISTINCT a FROM admins a INNER JOIN a.books b", Issue.class);
         List<Admin> resultList = query.getResultList();
         resultList.forEach(System.out::println);
@@ -70,6 +70,42 @@ public class IssueBean implements IssueBeanI {
     public List<Admin> pendingBooks() {
         Query query = entityManager.createQuery("SELECT DISTINCT a FROM admins a LEFT JOIN a.books b", Issue.class);
         List<Admin> resultList = query.getResultList();
+        resultList.forEach(System.out::println);
+        return resultList;
+    }
+
+    public List<Issue> getIssueByBookId(String BookId) {
+        try {
+            Query query = entityManager.createNamedQuery("Issue.findByBookId", Issue.class);
+            query.setParameter("bookId", BookId);
+            return (List<Issue>) query.getResultList();
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public void orderBy(){
+        Query query = entityManager.createQuery("SELECT s FROM issues a ORDER BY s.id DESC");
+        List<Issue> resultList = query.getResultList();
+        resultList.forEach(System.out::println);
+    }
+    public List<Issue> getUnIssuedBooks(String BookId) {
+        try {
+            Query query = entityManager.createNamedQuery("Issue.findByBookId", Issue.class);
+            query.setParameter("bookId", BookId);
+            return (List<Issue>) query.getResultList();
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Issue> getTotalIssues() {
+        Query query = entityManager.createQuery("SELECT DISTINCT a FROM admins a INNER JOIN a.books b", Issue.class);
+        List<Issue> resultList = query.getResultList();
         resultList.forEach(System.out::println);
         return resultList;
     }

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "books")
-public class Book extends BaseEntity{
+public class Book extends  BaseEntity{
 
     @Embedded
     private BookDetail bookDetail;
@@ -16,6 +16,9 @@ public class Book extends BaseEntity{
     private String genre;
     @Column(name = "author")
     private String Author;
+
+    @Column
+    private String BookId;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -47,6 +50,7 @@ public class Book extends BaseEntity{
     }
 
     public void setBookDetail(BookDetail bookDetail) {
+
         this.bookDetail = bookDetail;
     }
     @JsonbTransient
@@ -55,6 +59,23 @@ public class Book extends BaseEntity{
     }
 
     public void setIssues(List<Issue> issues) {
+
         this.issues = issues;
+    }
+
+    public BookStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BookStatus status) {
+        this.status = status;
+    }
+
+    public String getBookId() {
+        return BookId;
+    }
+
+    public void setBookId(String bookId) {
+        BookId = bookId;
     }
 }

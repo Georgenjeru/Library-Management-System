@@ -1,4 +1,5 @@
 <%@ page import="com.model.Book" %>
+<%@ page import="com.model.BookStatus" %>
 <%@ page import="com.bean.BookBean" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
@@ -21,10 +22,11 @@
                                   <h6 class="mb-4">Books Table</h6>
                              <table class="table">
                                    <tr> <td> Id: </td> <td> <input type= "text" name="id"> </td> </tr>
-                                   <tr> <td> Book Id: </td> <td> <input type= "text" name="bookDetail.bookId"> </td> </tr>
+                                   <tr> <td> Book Id: </td> <td> <input type= "text" name="bookId"> </td> </tr>
                                    <tr> <td> Book Genre: </td> <td> <input type= "text" name="genre"> </td> </tr>
                                    <tr> <td> Book Title: </td> <td> <input type= "text" name= "bookDetail.title"> </td> </tr>
                                    <tr> <td> Book Author: </td> <td> <input type= "text" name= "author"> </td> </tr>
+                                   <tr> <td> Book Status: </td> <td> <input type= "text" name= "status"> </td> </tr>
                                    <tr> <td> <input type= "submit" value= "Submit"></tr>
                              </table>
                             </div>

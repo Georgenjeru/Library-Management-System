@@ -14,6 +14,26 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.subethamail/subethasmtp -->
+    <dependency>
+      <groupId>org.subethamail</groupId>
+      <artifactId>subethasmtp</artifactId>
+      <version>3.1.7</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.sun.mail/imap -->
+    <dependency>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>imap</artifactId>
+      <version>2.0.1</version>
+    </dependency>
+
+
+
+
+
     <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -64,6 +84,14 @@
       <artifactId>hibernate-core</artifactId>
       <version>6.1.5.Final</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-email</artifactId>
+      <version>1.5</version>
+    </dependency>
+
+
 
     <dependency>
       <groupId>javax.servlet.jsp</groupId>

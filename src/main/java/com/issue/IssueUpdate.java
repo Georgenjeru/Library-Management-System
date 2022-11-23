@@ -53,7 +53,7 @@ public class IssueUpdate extends HttpServlet {
             resp.sendRedirect("./admin_add.jsp");
             return;
         }
-        if (StringUtils.isBlank(issue.getBookDetail().getBookId())) {
+        if (StringUtils.isBlank(issue.getBookId())) {
             servletCtx.setAttribute("addError","Book Id is required");
             resp.sendRedirect("./issue_add.jsp");
             return;

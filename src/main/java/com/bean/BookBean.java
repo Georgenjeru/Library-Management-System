@@ -22,7 +22,7 @@ public class BookBean implements BookBeanI {
 
 
     public void add(Book book) {
-        if (book == null || StringUtils.isBlank(book.getBookDetail().getBookId()) || StringUtils.isBlank(book.getBookDetail().getTitle()))
+        if (book == null || StringUtils.isBlank(book.getBookId()) || StringUtils.isBlank(book.getBookDetail().getTitle()))
             return;
         if (book.getAuthor() == null)
             book.setAuthor("author");
@@ -52,7 +52,7 @@ public class BookBean implements BookBeanI {
             return;
         if (StringUtils.isBlank(book.getGenre()))
             return;
-        if (StringUtils.isBlank(book.getBookDetail().getBookId()))
+        if (StringUtils.isBlank(book.getBookId()))
             return;
 
         if (book.getId() != null)
@@ -78,6 +78,12 @@ public class BookBean implements BookBeanI {
 
         return entityManager.createQuery("FROM Book b", Book.class).getResultList();
     }
+
+    public List<Book> issueList() {
+
+        return entityManager.createQuery("FROM Book b", Book.class).getResultList();
+    }
+
 
 
 }

@@ -1,6 +1,9 @@
+<%@ page import="com.model.Issue" %>
+<%@ page import="com.bean.IssueBean" %>
+<%@ page import="com.model.Book" %>
+<%@ page import="com.bean.BookBean" %>
 <%@ taglib prefix="cht" uri="./WEB-INF/tlds/header.tld" %>
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
-<%@ page import="com.model.Issue" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
@@ -22,6 +25,8 @@
                                    <tr> <td> Book ID: </td> <td> <input type= "text" name="bookId"> </td> </tr>
                                    <tr> <td> Book Title: </td> <td> <input type= "text" name="title"> </td> </tr>
                                    <tr> <td> User ID: </td> <td> <input type= "text" name= "userId"> </td> </tr>
+                                   <tr> <td> Start Date: </td> <td> <input type= "text" name= "startDate"> </td> </tr>
+                                   <tr> <td> End Date: </td> <td> <input type= "text" name= "endDate"> </td> </tr>
                                    <tr> <td> Period in Days: </td> <td> <input type= "text" name= "period"> </td> </tr>
 
                                    <tr> <td> <input type= "submit" value= "Submit"></tr>

@@ -32,7 +32,7 @@
                                 <th>User Email</th>
                                 <th>User Registration Number</th>
                                 <th>User Name</th>
-                                <th>Options</th>
+                                <th>Book Id</th>
 
                          </tr>
                      <jc:forEach items="${adminBean.list}" var="admin">
@@ -41,15 +41,12 @@
                                    <td> ${fn:trim(admin.email)} </td>
                                    <td> ${admin.regNo} </td>
                                    <td> ${fn:toLowerCase(admin.name)}  </td>
-                                   <td><a href="./updateAdmin.jsp?id=${admin.id}">Edit</a></td>
-                                    <td><a href="./deleteAdmin?id=${admin.id}"}>Delete</a></td>
 
                              </tr>
                      </jc:forEach>
                 </table>
            </div>
         </div>
-        <br/> Books List <a href='./userbooks.jsp'>Books List </a><br/>
 <cft:Footer>&copy; <a href="#">George lms</a>, All Right Reserved. </cft:Footer>
 
 

@@ -7,6 +7,9 @@ import java.util.Date;
 @Table(name = "issues")
 public class Issue extends BaseEntity{
 
+
+    @Column
+    private String BookId;
     @Column(name = "userId")
     private String UserId;
     @Column(name = "period")
@@ -45,15 +48,6 @@ public class Issue extends BaseEntity{
     }
 
 
-    public BookDetail getBookDetail() {
-        return bookDetail;
-    }
-
-    public void setBookDetail(BookDetail bookDetail) {
-
-        this.bookDetail = bookDetail;
-    }
-
     public Book getBook() {
         return book;
     }
@@ -76,14 +70,33 @@ public class Issue extends BaseEntity{
     }
 
     public void setStartDate(Date startDate) {
+
         StartDate = startDate;
     }
 
     public Date getEndDate() {
+
         return EndDate;
     }
 
     public void setEndDate(Date endDate) {
+
         EndDate = endDate;
+    }
+
+    public String getBookId() {
+        return BookId;
+    }
+
+    public void setBookId(String bookId) {
+        BookId = bookId;
+    }
+
+    public BookDetail getBookDetail() {
+        return bookDetail;
+    }
+
+    public void setBookDetail(BookDetail bookDetail) {
+        this.bookDetail = bookDetail;
     }
 }

@@ -14,7 +14,6 @@ import java.util.List;
 
 @Named("IssueView")
 public class IssueView implements Serializable {
-
     @EJB
     private IssueBeanI issueBean;
 

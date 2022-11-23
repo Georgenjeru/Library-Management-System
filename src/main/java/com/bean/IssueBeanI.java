@@ -15,9 +15,13 @@ public interface IssueBeanI {
 
     List<Issue> getList();
 
-    List<Admin> viewIssuedBooks();
+    List<Admin> getUsersWithBooks() ;
 
     List<Admin> pendingBooks();
+
+    List<Issue> getTotalIssues();
+
+    List<Issue> getIssueByBookId(String BookId);
 }
 
 

@@ -6,19 +6,9 @@ import java.io.Serializable;
 @Embeddable
 public class BookDetail implements Serializable{
 
-    @Column
-    private String BookId;
 
     @Column
     private String Title;
-
-    public String getBookId() {
-        return BookId;
-    }
-
-    public void setBookId(String bookId) {
-        BookId = bookId;
-    }
 
     public String getTitle() {
         return Title;
