@@ -1,5 +1,4 @@
 <%@ page import="com.model.Book" %>
-<%@ page import="com.model.BookStatus" %>
 <%@ page import="com.bean.BookBean" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
@@ -16,11 +15,10 @@
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
 
-<h1> BOOKS </h1>
-           <br/>Add Books <a href='./book.jsp'>Add Books</a><br/>
+<h1>Books by Id </h1>
                <div class="col-12">
                     <div class="bg-secondary rounded h-100 p-4">
-                        <h6 class="mb-4">Bordered Table</h6>
+                        <h6 class="mb-4">Books Table</h6>
                            <div class="table table-bordered">
                               <table class="table">
                                  <tr>
@@ -29,18 +27,14 @@
                                     <th>Book Genre</th>
                                     <th>Book Title</th>
                                     <th>Book Author</th>
-                                    <th>Book Status</th>
-                                    <th>Options</th>
                                  </tr>
-                                   <jc:forEach items="${BookView.list}" var="book">
+                                   <jc:forEach items="${issueBean.getIssueByBookId}" var="book">
                                       <tr>
                                         <td> ${book.id} </td>
                                         <td> ${book.bookId} </td>
                                         <td> ${fn:length(book.genre)} </td>
                                         <td> ${book.bookDetail.title} </td>
                                         <td> ${fn:toUpperCase(book.author)} </td>
-                                        <td> ${book.status == BookStatus} </td>
-                                        <td><a href="./updateBook.jsp?id=${book.id}">Edit</a> | <a href="./deleteBook?Id=${book.id}"}>Delete</a></td>
                                       </tr>
                                    </jc:forEach>
                               </table>
@@ -48,15 +42,6 @@
                     </div>
                </div>
 
-               <br/>View Issued Books <a href='./viewissuedbook.jsp'>View Issued Books</a><br/>
-
-               <br/>Books by Id <a href='./bookbyId.jsp'>View Books by Id</a><br/>
-
-
-
            Home? <a href='./dashboard.jsp'>Home</a><br/>
-
-
-
 
 <cft:Footer>&copy; <a href="#">George lms</a>, All Right Reserved. </cft:Footer>

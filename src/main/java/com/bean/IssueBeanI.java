@@ -22,6 +22,8 @@ public interface IssueBeanI {
     List<Issue> getTotalIssues();
 
     List<Issue> getIssueByBookId(String BookId);
+
+    List<Issue> getUnIssuedBooks(String BookId);
 }
 
 
