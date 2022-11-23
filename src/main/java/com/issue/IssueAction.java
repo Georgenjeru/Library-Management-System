@@ -47,6 +47,11 @@ public class IssueAction extends HttpServlet {
             res.sendRedirect("./issue.jsp");
             return;
         }
+        if (StringUtils.isBlank(issue.getTitle())) {
+            servletCtx.setAttribute("addIssueError", "Title is required<br/>");
+            res.sendRedirect("./issue.jsp");
+            return;
+        }
 
         if (StringUtils.isBlank(issue.getUserId())) {
             servletCtx.setAttribute("addIssueError", "User ID required<br/>");
@@ -58,16 +63,16 @@ public class IssueAction extends HttpServlet {
             res.sendRedirect("./issue.jsp");
             return;
         }
-        if (StringUtils.isBlank((CharSequence) issue.getStartDate())) {
+        /*if (StringUtils.isBlank(issue.getStartDate().toString())) {
             servletCtx.setAttribute("addIssueError", "Start Date required<br/>");
             res.sendRedirect("./issue.jsp");
             return;
         }
-        if (StringUtils.isBlank((CharSequence) issue.getStartDate())) {
+        if (StringUtils.isBlank(issue.getStartDate().toString())) {
             servletCtx.setAttribute("addIssueError", "End Date required<br/>");
             res.sendRedirect("./issue.jsp");
             return;
-        }
+        }*/
 
         issueBean.add(issue);
 

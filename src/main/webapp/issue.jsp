@@ -22,21 +22,20 @@
                            <div class="table table-bordered">
                               <table class="table">
                                  <tr>
+                                    <th> Id </th>
                                     <th>Book ID</th>
                                     <th>Book Title</th>
                                     <th>User ID</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
                                     <th>Period in Days</th>
                                     <th>Options</th>
                                  </tr>
                                    <jc:forEach items="${IssueView.list}" var="issue">
                                       <tr>
+                                        <td> ${issue.id} </td>
                                         <td> ${issue.bookId} </td>
-                                        <td> ${issue.bookDetail.title} </td>
+                                        <td> ${issue.title} </td>
                                         <td> ${issue.userId} </td>
-                                        <td> ${issue.startDate} </td>
-                                        <td> ${issue.endDate} </td>
+
                                         <td> ${fn:toUpperCase(issue.period)} </td>
                                         <td><a href="./updateIssue.jsp?id=${issue.id}">Edit</a></td>
                                         <td><a href="./deleteIssue?id=${issue.id}"}>Delete</a></td>
@@ -46,4 +45,6 @@
                            </div>
                     </div>
                </div>
+
+           <br/>View Total Issues <a href='./totalissues.jsp'>View Total Issues</a><br/>
 <cft:Footer>&copy; <a href="#">George lms</a>, All Right Reserved. </cft:Footer>

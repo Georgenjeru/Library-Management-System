@@ -50,6 +50,7 @@
            </div>
         </div>
         <br/> Books List <a href='./userbooks.jsp'>Books List </a><br/>
+        <br/> User pdf <a href='./usersReport'> User Pdf </a><br/>
 <cft:Footer>&copy; <a href="#">George lms</a>, All Right Reserved. </cft:Footer>
 
 

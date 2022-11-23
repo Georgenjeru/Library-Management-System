@@ -33,7 +33,7 @@ public class EmailBean implements EmailBeanI {
 
         this.session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(from, "uulxldyyzjwbwjzq");
+                return new PasswordAuthentication(from, "iuahavstujrfgxpl");
             }
         });
 

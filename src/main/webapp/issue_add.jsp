@@ -22,11 +22,10 @@
                             <div class="bg-secondary rounded h-100 p-4">
                                   <h6 class="mb-4">Issue Table</h6>
                              <table class="table">
+                                   <tr> <td> Id: </td> <td> <input type= "text" name="id"> </td> </tr>
                                    <tr> <td> Book ID: </td> <td> <input type= "text" name="bookId"> </td> </tr>
                                    <tr> <td> Book Title: </td> <td> <input type= "text" name="title"> </td> </tr>
                                    <tr> <td> User ID: </td> <td> <input type= "text" name= "userId"> </td> </tr>
-                                   <tr> <td> Start Date: </td> <td> <input type= "text" name= "startDate"> </td> </tr>
-                                   <tr> <td> End Date: </td> <td> <input type= "text" name= "endDate"> </td> </tr>
                                    <tr> <td> Period in Days: </td> <td> <input type= "text" name= "period"> </td> </tr>
 
                                    <tr> <td> <input type= "submit" value= "Submit"></tr>

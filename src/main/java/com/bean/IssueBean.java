@@ -35,7 +35,6 @@ public class IssueBean implements IssueBeanI {
 
     }
 
-
     public  void update(Issue issue) {
         if (issue == null || StringUtils.isBlank(issue.getUserId()))
             return;
@@ -45,10 +44,10 @@ public class IssueBean implements IssueBeanI {
             return;
         if (StringUtils.isBlank(issue.getBookId()))
         return;
-        if (StringUtils.isBlank((CharSequence) issue.getStartDate()))
+        /*if (StringUtils.isBlank(issue.getStartDate().toString()))
             return;
-        if (StringUtils.isBlank((CharSequence) issue.getEndDate()))
-            return;
+        if (StringUtils.isBlank(issue.getEndDate().toString()))
+            return;*/
 
         if (issue.getId() != null)
             System.out.println("Entity manager will update");

@@ -1,7 +1,12 @@
 package com.bean;
 
+import com.mail.EmailBean;
+import com.mail.EmailBeanI;
+import com.mail.MailWrapper;
 import com.model.User;
 import com.model.Validate;
+
+import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ejb.Remote;
@@ -14,6 +19,9 @@ public class RegisterUserBean implements RegisterUserBeanI{
 
     @PersistenceContext
     EntityManager entityManager;
+
+    @EJB
+    EmailBeanI emailBean;
 
     public User register(User user) throws Exception {
         if (user == null)
@@ -45,6 +53,18 @@ public class RegisterUserBean implements RegisterUserBeanI{
         validate.setConfirmPassword(user.getConfirmPassword());
 
         user.addValidate(validate);
+
+        MailWrapper mail = new MailWrapper();
+        mail.setSubject("Library System | New User registration");
+        mail.setEmailTo("njerugeorge57@gmail.com");
+
+        String msg = "Hello, \n A new user has been registered to the system \n" +
+                "Name: " + user.getFirstName() + " " + user.getLastName() + "\n" +
+                "Email: " + user.getEmail() + "\n" +
+                "Thank you!";
+        mail.setMessage(msg);
+
+        emailBean.sendMail(mail);
 
         return entityManager.merge(user);
 

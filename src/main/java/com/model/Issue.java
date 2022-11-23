@@ -1,7 +1,7 @@
 package com.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "issues")
@@ -15,14 +15,17 @@ public class Issue extends BaseEntity{
     @Column(name = "period")
     private String Period;
 
-    @Column
-    Date StartDate;
+    /* @Column
+   LocalDate StartDate;
 
     @Column
-    Date EndDate;
+    LocalDate EndDate;
 
     @Embedded
-    private BookDetail bookDetail;
+    private BookDetail bookDetail;*/
+
+    @Column
+    private String Title;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Book book;
@@ -47,6 +50,13 @@ public class Issue extends BaseEntity{
         Period = period;
     }
 
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
 
     public Book getBook() {
         return book;
@@ -65,24 +75,6 @@ public class Issue extends BaseEntity{
         this.admin = admin;
     }
 
-    public Date getStartDate() {
-        return StartDate;
-    }
-
-    public void setStartDate(Date startDate) {
-
-        StartDate = startDate;
-    }
-
-    public Date getEndDate() {
-
-        return EndDate;
-    }
-
-    public void setEndDate(Date endDate) {
-
-        EndDate = endDate;
-    }
 
     public String getBookId() {
         return BookId;
@@ -92,11 +84,4 @@ public class Issue extends BaseEntity{
         BookId = bookId;
     }
 
-    public BookDetail getBookDetail() {
-        return bookDetail;
-    }
-
-    public void setBookDetail(BookDetail bookDetail) {
-        this.bookDetail = bookDetail;
-    }
 }

@@ -25,19 +25,13 @@
                                     <th>Book ID</th>
                                     <th>Book Title</th>
                                     <th>User ID</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
                                     <th>Period in Days</th>
-                                    <th>Options</th>
                                  </tr>
-                                   <jc:forEach items="${issueBean.getIssueByBookId()}" var="issue">
+                                   <jc:forEach items="${IssueView.list}" var="issue">
                                       <tr>
-                                        <td> ${issue.id} </td>
                                         <td> ${issue.bookId} </td>
-                                        <td> ${issue.bookDetail.title} </td>
+                                        <td> ${issue.title} </td>
                                         <td> ${issue.userId} </td>
-                                        <td> ${issue.startDate} </td>
-                                        <td> ${issue.endDate} </td>
                                         <td> ${fn:toUpperCase(issue.period)} </td>
                                       </tr>
                                    </jc:forEach>
@@ -45,4 +39,6 @@
                            </div>
                     </div>
                </div>
+
+
 <cft:Footer>&copy; <a href="#">George lms</a>, All Right Reserved. </cft:Footer>

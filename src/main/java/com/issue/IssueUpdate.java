@@ -59,7 +59,7 @@ public class IssueUpdate extends HttpServlet {
             return;
         }
 
-        if (StringUtils.isBlank(issue.getBookDetail().getTitle())) {
+        if (StringUtils.isBlank(issue.getTitle())) {
             servletCtx.setAttribute("addError","Book Title is required");
             resp.sendRedirect("./issue_add.jsp");
             return;
