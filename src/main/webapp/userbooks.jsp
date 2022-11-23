@@ -21,7 +21,7 @@
 <span style= "color:green;font-size: 24px;font-weight:bold">Logged In</span>
 
 
-<br/>Add User <a href='./admin.jsp'>Add User</a><br/>
+<br/>User/Books <a href='./admin.jsp'>User/Books</a><br/>
 <h1> Admin </h1>
         <div class="col-sm-12 col-xl-12">
            <div class="bg-secondary rounded h-100 p-4">

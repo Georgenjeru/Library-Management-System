@@ -13,8 +13,6 @@
 
 
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
-
-
 <h1>ISSUED BOOKS </h1>
                <div class="col-12">
                     <div class="bg-secondary rounded h-100 p-4">
